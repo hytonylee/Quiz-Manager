@@ -23,13 +23,23 @@ gem 'puma', '~> 3.7'
 # gem 'capistrano-rails', group: :development
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
-gem 'rails-erd'
 
+# Gemfiles used in Awesome Answers & Amazon Clone
+gem 'rack-cors'
+gem 'rails-erd'
+gem 'faker', '~>1.8.7'
+gem 'colorize'
+gem 'delayed_job_active_record'
+gem 'delayed_job_web'
+gem 'active_model_serializers'
+gem 'jwt'
+gem 'friendly_id'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'hirb'
+  gem 'awesome_print'
 end
 
 group :development do
