@@ -1,0 +1,14 @@
+nav a, nav span, nav p {
+  color: white;
+  padding: 10px;
+
+}
+
+nav a:hover {
+  color: FireBrick;
+  text-decoration: none;
+}
+
+nav {
+  background-color: #222529;
+}

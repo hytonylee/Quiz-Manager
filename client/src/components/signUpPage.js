@@ -7,6 +7,7 @@ function SignUpPage(props) {
   // Another way of writing the same thing:
   // function emptyFunction() {}
   // const onSubmit = props.onSubmit || emptyFunction;
+
   function handleSubmit(event){}
   //   event.preventDefault();
   //   const formData = new FormData(event.currentTarget);
@@ -27,8 +28,8 @@ function SignUpPage(props) {
   // }
 
   return(
-    <div>
-      <h1>Sign Up</h1>
+
+      // <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Field id='form-input-control-first-name'
@@ -66,7 +67,7 @@ function SignUpPage(props) {
                         label='Label with htmlFor'
             />
       </form>
-    </div>
+
   )
 }
 
