@@ -8,8 +8,15 @@ Rails.application.routes.draw do
         resources :answers, only: [:create, :update, :destroy]
       end
     end
+
     resources :tokens, only: [:create, :destroy]
+
+    namespace :admin do
+      resources :dashboard, only: [:index]
+    end
+    
   end
+
 
   match "*unmatched_route", to: "application#not_found", via: :all
 

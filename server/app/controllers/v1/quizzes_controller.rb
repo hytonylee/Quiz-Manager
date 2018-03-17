@@ -1,25 +1,26 @@
 class V1::QuizzesController < ApplicationController
-  before_action :find_quiz, only: [:update, :delete]
+  before_action :authenticate_user!
+  before_action :find_quiz, only: [:show, :update, :delete]
+  before_action :authorize_user!
+
 
   def index
     render json: Quiz.order(:id)
   end
 
   def show
-    render json: Quiz.find(params[:id])
+    render json: @quiz
   end
 
   def create
     quiz = Quiz.new quiz_params
     quiz.save!
-
     render json: quiz
   end
 
   def update
     @quiz.update! quiz_params
     render json: @quiz
-
   end
 
   def destroy
@@ -36,6 +37,14 @@ class V1::QuizzesController < ApplicationController
     @quiz = Quiz.find_by(id: params[:id])
   end
 
+  def authorize_user!
+    unless can?(:manage, :all)
+      flash[:alert] = 'Access Denied!'
+      render(
+        json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
+      )
+    end
+ end
 
 end
 

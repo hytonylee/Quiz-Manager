@@ -1,4 +1,5 @@
 class V1::TokensController < ApplicationController
+
   def create
     user = User.find_by(email: params[:email])
 
@@ -19,4 +20,5 @@ class V1::TokensController < ApplicationController
     end
 
   end
+  
 end

@@ -32,3 +32,4 @@ end
 users = User.all
 
 puts Cowsay.say "Created #{users.count} users", :tux
+puts "Login as admin #{super_user.email} and password of '#{PASSWORD}'"

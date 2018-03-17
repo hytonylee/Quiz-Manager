@@ -1,5 +1,8 @@
 class V1::UsersController < ApplicationController
 
+  before_action :authenticate_user!, except: [:create]
+  before_action :authorize_user!, except: [:create]
+
   def new
     user = User.new user_params
   end
@@ -43,5 +46,14 @@ class V1::UsersController < ApplicationController
       :password,
       :password_confirmation
     )
+  end
+
+  def authorize_user!
+    unless can?(:crud, @question)
+      flash[:alert] = 'Access Denied!'
+      render(
+        json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
+      )
+    end
   end
 end
