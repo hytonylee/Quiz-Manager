@@ -59,9 +59,10 @@ ActiveRecord::Schema.define(version: 20180317175507) do
     t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.boolean "is_admin"
+    t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "answers", "questions"

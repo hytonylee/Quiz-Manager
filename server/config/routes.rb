@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   namespace :v1 do
-    resources :users, only: [:create, :index, :show], shallow: true do
+    resources :users, only: [:new, :create, :index, :show], shallow: true do
       resources :quiz_takens, only: [:create, :update]
     end
     resources :quizzes, only: [:create, :index, :show, :update, :destroy], shallow: true do
@@ -12,7 +12,5 @@ Rails.application.routes.draw do
   end
 
   match "*unmatched_route", to: "application#not_found", via: :all
-
-
 
 end
