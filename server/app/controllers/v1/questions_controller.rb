@@ -1,6 +1,6 @@
 class V1::QuestionsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_question, only: [:update, :destroy]
+  before_action :find_question, only: [:show, :update, :destroy]
   before_action :authorize_user!
 
   def create
@@ -9,6 +9,10 @@ class V1::QuestionsController < ApplicationController
     question.save!
 
     render json: question.quiz
+  end
+
+  def show
+    render json: @question
   end
 
   def update

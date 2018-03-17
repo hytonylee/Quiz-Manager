@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :quiz_takens, only: [:create, :update]
     end
     resources :quizzes, only: [:create, :index, :show, :update, :destroy], shallow: true do
-      resources :questions, only: [:create, :update, :destroy] do
+      resources :questions, only: [:create, :show, :update, :destroy] do
         resources :answers, only: [:create, :update, :destroy]
       end
     end
