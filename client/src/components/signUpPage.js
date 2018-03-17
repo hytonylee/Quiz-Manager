@@ -7,24 +7,24 @@ function SignUpPage(props) {
   // Another way of writing the same thing:
   // function emptyFunction() {}
   // const onSubmit = props.onSubmit || emptyFunction;
-  function handleSubmit(event){
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    User.create({
-      first_name: formData.get('form-input-control-first-name'),
-      last_name: formData.get('form-input-control-last-name'),
-      email: formData.get('form-imput-control-email'),
-      password: formData.get('form-imput-control-password'),
-      password_confirmation: formData.get('form-imput-control-password-confirmation')
-    }).then(data => {
-      if(!data.error) {
-        const jwt = data.jwt;
-        localStorage.setItem('jwt', jwt);
-        onSignUp();
-        props.history.push('/');
-      }
-    });
-  }
+  function handleSubmit(event){}
+  //   event.preventDefault();
+  //   const formData = new FormData(event.currentTarget);
+  //   User.create({
+  //     first_name: formData.get('form-input-control-first-name'),
+  //     last_name: formData.get('form-input-control-last-name'),
+  //     email: formData.get('form-imput-control-email'),
+  //     password: formData.get('form-imput-control-password'),
+  //     password_confirmation: formData.get('form-imput-control-password-confirmation')
+  //   }).then(data => {
+  //     if(!data.error) {
+  //       const jwt = data.jwt;
+  //       localStorage.setItem('jwt', jwt);
+  //       onSignUp();
+  //       props.history.push('/');
+  //     }
+  //   });
+  // }
 
   return(
     <div>
@@ -63,7 +63,7 @@ function SignUpPage(props) {
             <Form.Field id='form-button-control-public'
                         control={Button}
                         content='Create Account'
-                        //label='Label with htmlFor'
+                        label='Label with htmlFor'
             />
       </form>
     </div>

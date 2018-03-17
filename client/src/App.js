@@ -3,7 +3,6 @@ import Homepage from './components/Homepage'
 
 
 
-
 class App extends React.Component {
   render() {
     return (
