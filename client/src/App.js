@@ -1,18 +1,18 @@
-import React from 'react';
-import Homepage from './components/Homepage'
 
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Homepage from "./components/Homepage";
 
 
 class App extends React.Component {
   render() {
     return (
-
-
-        <div className="App">
-          <Homepage />
-        </div>
-    )
-
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Homepage} />
+        </Switch>
+      </Router>
+    );
   }
 }
 
