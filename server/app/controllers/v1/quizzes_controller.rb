@@ -1,4 +1,5 @@
 class V1::QuizzesController < ApplicationController
+  before_action :find_quiz, only: [:update, :delete]
 
   def index
     render json: Quiz.order(:id)
@@ -9,10 +10,32 @@ class V1::QuizzesController < ApplicationController
   end
 
   def create
-    quiz_params = params.require(:quiz).permit(:name, :description, :difficulty, :quiz_points)
-    quiz = Quiz.new()
+    quiz = Quiz.new quiz_params
+    quiz.save!
+
+    render json: quiz
+  end
+
+  def update
+    @quiz.update! quiz_params
+    render json: @quiz
 
   end
+
+  def destroy
+    @quiz.destroy
+  end
+
+  private
+
+  def quiz_params
+    params.require(:quiz).permit(:name, :description, :difficulty, :quiz_points)
+  end
+
+  def find_quiz
+    @quiz = Quiz.find_by(id: params[:id])
+  end
+
 
 end
 
