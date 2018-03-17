@@ -20,7 +20,8 @@ class Homepage extends Component {
           </Container>
             <Divider />
           <Container textAlign='center' className="homepage-container mt-3">
-            <Button color='black' size='huge' className="btn btn-primary btn-lg">Enter</Button>
+            <Button color='black' size='huge' className="btn btn-primary btn-lg">Login</Button>
+            <Button color='black' size='huge' className="btn btn-primary btn-lg">Sign Up</Button>
           </Container>
         </Container>
 

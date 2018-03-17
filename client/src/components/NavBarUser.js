@@ -12,7 +12,7 @@ function NavBar (props) {
       <Router>
         <nav className="NavBar d-flex pt-2">
           {/* Public Navbar */}
-          <div className="mr-auto pt-2">
+          {/* <div className="mr-auto pt-2">
             <Icon name= "code" color='red' className="logo mr-auto pt-2 pl-4 pr-5" />
             <NavLink exact to="/" className="mr-auto">Available Students</NavLink>
             <span>|</span>
@@ -22,10 +22,10 @@ function NavBar (props) {
             <NavLink exact to="/" >Sign In</NavLink>
             <span>|</span>
             <NavLink exact to="/" className="pr-4">Sign Out</NavLink>
-          </div>
+          </div> */}
 
           {/* User NavBar */}
-          {/* <div className="mr-auto pt-2">
+          <div className="mr-auto pt-2">
             <Icon name= "code" color='red' className="logo mr-auto pt-2 pl-4 pr-5" />
             <NavLink exact to="/" className="mr-auto">Drillz</NavLink>
             <span>|</span>
@@ -37,7 +37,7 @@ function NavBar (props) {
             <NavLink exact to="/" >Profile</NavLink>
             <span>|</span>
             <NavLink exact to="/" className="pr-4">Logout</NavLink>
-          </div> */}
+          </div>
 
           {/* Admin NavBar */}
           {/*
