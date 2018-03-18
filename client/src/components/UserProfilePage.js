@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import { Button, Container, Divider, Icon } from 'semantic-ui-react';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -26,4 +25,3 @@ class UserProfilePage extends Component {
 
 
 export default UserProfilePage
-

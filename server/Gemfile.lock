@@ -55,6 +55,7 @@ GEM
     cocoon (1.2.11)
     colorize (0.8.1)
     concurrent-ruby (1.0.5)
+    cowsay (0.3.0)
     crass (1.0.3)
     delayed_job (4.1.4)
       activesupport (>= 3.0, < 5.2)
@@ -174,6 +175,7 @@ DEPENDENCIES
   cancancan
   cocoon
   colorize
+  cowsay
   delayed_job_active_record
   delayed_job_web
   faker (~> 1.8.7)
