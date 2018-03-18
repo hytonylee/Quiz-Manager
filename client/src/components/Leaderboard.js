@@ -35,7 +35,7 @@ class Leaderboard extends React.Component {
               {
                 users.map(
                   user => (
-                    <ListGroupItem>`${user.name}`</ListGroupItem>
+                    <ListGroupItem>`${user.first_name}: ${user.total_score}`</ListGroupItem>
                   )
                 )
               }

@@ -8,6 +8,7 @@ import QuestionShow from "./components/QuestionShow";
 import AuthRoute from "./components/AuthRoute";
 
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -25,6 +26,7 @@ class App extends React.Component {
 
   signIn() {
     const jwt = localStorage.getItem("jwt");
+
     if (jwt) {
       const payload = jwtDecode(jwt);
       this.setState({
