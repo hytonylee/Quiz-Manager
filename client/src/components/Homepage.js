@@ -1,10 +1,40 @@
 import React, { Component } from 'react';
-import { Button, Container, Divider, Icon } from 'semantic-ui-react';
+import { Container, Divider, Icon } from 'semantic-ui-react';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../index.css';
+import SignUpPage from './SignUpPage';
+import SignInPage from './SignInPage';
 
 
 class Homepage extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalSignUp: false,
+      modalLogin: false,
+    };
+
+    this.signup_toggle = this.signup_toggle.bind(this);
+    this.login_toggle = this.login_toggle.bind(this);
+
+  }
+
+  signup_toggle() {
+    this.setState({
+      modalSignUp: !this.state.modalSignUp
+    });
+  }
+
+  login_toggle() {
+    this.setState({
+      modalLogin: !this.state.modalLogin
+    });
+  }
+
+
+
   render () {
     return (
       <main className="Homepage mt-5">
@@ -20,8 +50,26 @@ class Homepage extends Component {
           </Container>
             <Divider />
           <Container textAlign='center' className="homepage-container mt-3">
-            <Button color='black' size='huge' className="btn btn-primary btn-lg">Login</Button>
-            <Button color='black' size='huge' className="btn btn-primary btn-lg">Sign Up</Button>
+
+            <Button  onClick={this.login_toggle} className="btn btn-dark btn-lg mr-3">Login</Button>
+            <Modal show={this.state} isOpen={this.state.modalLogin} toggle={this.login_toggle} className={this.props.className}>
+              <ModalBody>
+                <SignInPage />
+              </ModalBody>
+            </Modal>
+
+
+            <Button  onClick={this.signup_toggle} className="btn btn-dark btn-lg ml-3">Sign Up</Button>
+            <Modal show={this.state} isOpen={this.state.modalSignUp} toggle={this.signup_toggle} className={this.props.className}>
+              <ModalHeader toggle={this.signup_toggle}>Please Sign Up</ModalHeader>
+              <ModalBody>
+                <SignUpPage />
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.signup_toggle}>Sign Up</Button>{' '}
+                <Button color="danger" onClick={this.signup_toggle}>Cancel</Button>
+              </ModalFooter>
+            </Modal>
           </Container>
         </Container>
 

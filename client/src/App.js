@@ -8,6 +8,7 @@ import QuestionShow from "./components/QuestionShow";
 import AuthRoute from "./components/AuthRoute";
 
 class App extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -43,8 +44,9 @@ class App extends React.Component {
     return !!this.state.user;
   }
 
+
   render() {
-    console.log(this.state.quiz);
+    // console.log(this.state.quiz);
     return (
       <Router>
         <Switch>
