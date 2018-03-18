@@ -8,6 +8,7 @@ import SignInPage from "./components/SignInPage";
 import QuestionShow from "./components/QuestionShow";
 import AuthRoute from "./components/AuthRoute";
 
+
 class App extends React.Component {
 
   constructor(props) {
@@ -59,6 +60,7 @@ class App extends React.Component {
             component={QuestionShow}
           />
         </Switch>
+
       </Router>
     );
   }
