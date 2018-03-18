@@ -6,6 +6,7 @@ import { Token } from "../lib/requests";
 class SignInPage extends Component {
   constructor(props) {
     super(props);
+    this.createToken = this.createToken.bind(this);
   }
 
   createToken(event) {
@@ -35,6 +36,7 @@ class SignInPage extends Component {
         <Form on Submit={this.createToken}>
           <Form.Field>
             <label>Email</label>
+
             <input
               palceholder="youremail@gmail.com"
               id="email"
@@ -47,7 +49,7 @@ class SignInPage extends Component {
             <label>Password</label>
             <input type="password" id="password" name="password" />
           </Form.Field>
-          <Button type="submit">Sign In</Button>
+          <Button type='submit'>Sign In</Button>
         </Form>
         <div>
           {/* <Link to={'/'}>forgot password?</Link>{' '}

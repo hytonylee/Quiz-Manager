@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import jwtDecode from "jwt-decode";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -24,7 +25,6 @@ class App extends React.Component {
 
   signIn() {
     const jwt = localStorage.getItem("jwt");
-
     if (jwt) {
       const payload = jwtDecode(jwt);
       this.setState({

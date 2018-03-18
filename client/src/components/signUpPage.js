@@ -29,8 +29,9 @@ function SignUpPage(props) {
 
   return(
 
-      // <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
+    <div className='signUpPage'>
+      <h1>Sign Up</h1>
+      <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Field id='form-input-control-first-name'
                       control={Input}
@@ -66,7 +67,9 @@ function SignUpPage(props) {
                         content='Create Account'
                         label='Label with htmlFor'
             />
-      </form>
+
+      </Form>
+    </div>
 
   )
 }
