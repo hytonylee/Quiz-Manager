@@ -2,23 +2,32 @@ const DOMAIN = "localhost:3000";
 const API_PREFIX = "/v1";
 const BASE_URL = `http://${DOMAIN}${API_PREFIX}`;
 
+function getJWT() {
+  return localStorage.getItem("jwt");
+}
+
 const Quiz = {
   all() {
     return fetch(`${BASE_URL}/quizzes`, {
-      headers: {}
+      headers: {
+        Authorization: getJWT()
+      }
     }).then(res => res.json());
   },
   //----------------------------------------------
   one(id) {
     return fetch(`${BASE_URL}/quizzes/${id}`, {
-      headers: {}
+      headers: {
+        Authorization: getJWT()
+      }
     }).then(res => res.json());
   },
   //----------------------------------------------
   create(params) {
     return fetch(`${BASE_URL}/quizzes`, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: getJWT()
       },
       method: "POST",
       body: JSON.stringify(params)
@@ -28,7 +37,8 @@ const Quiz = {
   edit(params, id) {
     return fetch(`${BASE_URL}/quizzes/${id}`, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: getJWT()
       },
       method: "PATCH",
       body: JSON.stringify(params)
@@ -39,20 +49,25 @@ const Quiz = {
 const Question = {
   all() {
     return fetch(`${BASE_URL}/questions`, {
-      headers: {}
+      headers: {
+        Authorization: getJWT()
+      }
     }).then(res => res.json());
   },
   //----------------------------------------------
   one(id) {
     return fetch(`${BASE_URL}/questions/${id}`, {
-      headers: {}
+      headers: {
+        Authorization: getJWT()
+      }
     }).then(res => res.json());
   },
   //----------------------------------------------
   create(params) {
     return fetch(`${BASE_URL}/questions`, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: getJWT()
       },
       method: "POST",
       body: JSON.stringify(params)
@@ -62,7 +77,8 @@ const Question = {
   edit(params, id) {
     return fetch(`${BASE_URL}/questions/${id}`, {
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        Authorization: getJWT()
       },
       method: "PATCH",
       body: JSON.stringify(params)
@@ -85,13 +101,17 @@ const Token = {
 const User = {
   one(id) {
     return fetch(`${BASE_URL}/users/${id}`, {
-      headers: {}
+      headers: {
+        Authorization: getJWT()
+      }
     }).then(res => res.json());
   },
   //----------------------------------------------
   all() {
     return fetch(`${BASE_URL}/users`, {
-      headers: {}
+      headers: {
+        Authorization: getJWT()
+      }
     }).then(res => res.json());
   }
 };

@@ -1,6 +1,6 @@
 class V1::QuizzesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_quiz, only: [:show, :update, :delete]
+  before_action :find_quiz, only: [:show, :update, :destroy]
   before_action :authorize_user!
 
   def index
@@ -12,7 +12,7 @@ class V1::QuizzesController < ApplicationController
   end
 
   def create
-    quiz = @quiz
+    quiz = Quiz.new quiz_params
     quiz.save!
     render json: quiz
   end

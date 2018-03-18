@@ -1,5 +1,4 @@
 
-
 import React from "react";
 import jwtDecode from "jwt-decode";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -10,9 +9,9 @@ import AuthRoute from "./components/AuthRoute";
 
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
+
     this.state = {
       user: null
     };
@@ -45,16 +44,20 @@ class App extends React.Component {
     return !!this.state.user;
   }
 
-
   render() {
     // console.log(this.state.quiz);
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route exact path="/sign_in" component={SignInPage} />
+
+          <Route
+            path="/sign_in"
+            render={props => <SignInPage {...props} onSignIn={this.signIn} />}
+          />
           <AuthRoute
             isAuthenticated={this.isSignedIn()}
+            onSignIn={this.signIn}
             exact
             path="/quizzes/:quizId/question/:questionId"
             component={QuestionShow}

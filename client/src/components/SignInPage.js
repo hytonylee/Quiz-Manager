@@ -1,30 +1,37 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Button, Form } from "semantic-ui-react";
 import { Token } from "../lib/requests";
 
 class SignInPage extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      errors: []
+    };
+
     this.createToken = this.createToken.bind(this);
   }
 
   createToken(event) {
     const { onSignIn = () => {} } = this.props;
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
-
     Token.create({
       email: formData.get("email"),
       password: formData.get("password")
     }).then(data => {
-      if (!data.error) {
+      if (!data.errors) {
         localStorage.setItem("jwt", data.jwt);
         onSignIn();
         this.props.history.push("/");
       } else {
-        alert(data.error);
+        this.setState({
+          errors: [
+            {
+              message: "Invalid username or password"
+            }
+          ]
+        });
       }
     });
   }
@@ -33,7 +40,7 @@ class SignInPage extends Component {
     return (
       <main className="SignInPage">
         <h1>Sign In</h1>
-        <Form on Submit={this.createToken}>
+        <Form onSubmit={this.createToken}>
           <Form.Field>
             <label>Email</label>
 
@@ -51,10 +58,7 @@ class SignInPage extends Component {
           </Form.Field>
           <Button type='submit'>Sign In</Button>
         </Form>
-        <div>
-          {/* <Link to={'/'}>forgot password?</Link>{' '}
-          <Link to={'/'}>Don't have an account? Sign up!</Link>{' '} */}
-        </div>
+        <div />
       </main>
     );
   }
