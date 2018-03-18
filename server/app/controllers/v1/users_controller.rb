@@ -3,6 +3,10 @@ class V1::UsersController < ApplicationController
   before_action :authenticate_user!, except: [:create]
   before_action :authorize_user!, except: [:create]
 
+  def index
+    render json: User.order(:id)
+  end
+
   def new
     user = User.new user_params
   end

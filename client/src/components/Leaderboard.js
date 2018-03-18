@@ -1,44 +1,42 @@
-import React from 'react';
-import { User } from '../lib/requests';
-import { ListGroup, ListGroupItem, Container, Row, Col } from 'reactstrap';
+import React from "react";
+import { User } from "../lib/requests";
+import { ListGroup, ListGroupItem, Container, Row, Col } from "reactstrap";
 
 class Leaderboard extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state= {
+  constructor(props) {
+    super(props);
+    this.state = {
       users: [],
       loading: true
-    }
+    };
   }
 
-  comonentDidMount () {
-    User
-      .all()
-      .then(
-        users => {
-          this.setState({
-            users: users,
-            loading: false
-          });
-        }
-      );
+  componentDidMount() {
+    User.all().then(users => {
+      this.setState({
+        users: users,
+        loading: false
+      });
+    });
+    console.log(this.state.users);
   }
 
   render() {
     const { users, loading } = this.state;
+    console.log(users);
     return (
       <Container>
         <Row>
           <Col xs="8">
             <ListGroup>
               <h1>Leaderboard</h1>
-              {
-                users.map(
-                  user => (
-                    <ListGroupItem>`${user.first_name}: ${user.total_score}`</ListGroupItem>
-                  )
-                )
-              }
+
+              {users.map(user => (
+                <ListGroupItem key={user.id}>
+                  {user.first_name} {user.last_name}
+                </ListGroupItem>
+              ))}
+
             </ListGroup>
           </Col>
           <Col xs="4">
@@ -54,4 +52,4 @@ class Leaderboard extends React.Component {
   }
 }
 
-export default Leaderboard
+export default Leaderboard;

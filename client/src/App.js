@@ -1,13 +1,12 @@
-
 import React from "react";
 import jwtDecode from "jwt-decode";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import SignInPage from "./components/SignInPage";
 import QuestionShow from "./components/QuestionShow";
+import QuizIndex from "./components/QuizIndex";
+import Leaderboard from "./components/Leaderboard";
 import AuthRoute from "./components/AuthRoute";
-
-
 
 class App extends React.Component {
   constructor(props) {
@@ -64,8 +63,19 @@ class App extends React.Component {
             path="/quizzes/:quizId/question/:questionId"
             component={QuestionShow}
           />
+          <AuthRoute
+            isAuthenticated={this.isSignedIn()}
+            exact
+            path="/quizzes"
+            component={QuizIndex}
+          />
+          <AuthRoute
+            isAuthenticated={this.isSignedIn()}
+            exact
+            path="/leaderboard"
+            component={Leaderboard}
+          />
         </Switch>
-
       </Router>
     );
   }

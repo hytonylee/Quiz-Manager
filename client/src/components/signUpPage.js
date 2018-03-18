@@ -1,14 +1,14 @@
-import React from 'react';
-import { Form, Input, Button } from 'semantic-ui-react';
+import React from "react";
+import { Form, Input, Button } from "semantic-ui-react";
 // import {User} from '../lib/requests';
 
 function SignUpPage(props) {
-  const {onSignUp = () => {} } = props
+  const { onSignUp = () => {} } = props;
   // Another way of writing the same thing:
   // function emptyFunction() {}
   // const onSubmit = props.onSubmit || emptyFunction;
 
-  function handleSubmit(event){}
+  function handleSubmit(event) {}
   //   event.preventDefault();
   //   const formData = new FormData(event.currentTarget);
   //   User.create({
@@ -27,51 +27,54 @@ function SignUpPage(props) {
   //   });
   // }
 
-  return(
-
-    <div className='signUpPage'>
+  return (
+    <div className="signUpPage">
       <h1>Sign Up</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group widths='equal'>
-          <Form.Field id='form-input-control-first-name'
-                      control={Input}
-                      label='First name'
-                      placeholder='First name'
+        <Form.Group widths="equal">
+          <Form.Field
+            id="form-input-control-first-name"
+            control={Input}
+            label="First name"
+            placeholder="First name"
           />
-          <Form.Field id='form-imput-control-last-name'
-                      control={Input}
-                      label='Last name'
-                      placeholder='Last name'
+          <Form.Field
+            id="form-imput-control-last-name"
+            control={Input}
+            label="Last name"
+            placeholder="Last name"
           />
-          </Form.Group>
+        </Form.Group>
 
-            <Form.Field id='form-imput-control-email'
-                        control={Input}
-                        label='Email'
-                        placeholder='youremail@gmail.com'
-            />
-          <Form.Group widths='equal'>
-            <Form.Field id='form-imput-control-password'
-                        control={Input}
-                        label='Password'
-                        type='password'
-            />
-            <Form.Field id='form-imput-control-password-confirmation'
-                        control={Input}
-                        label='Password Confirmation'
-                        type='password'
-            />
-          </Form.Group>
-            <Form.Field id='form-button-control-public'
-                        control={Button}
-                        content='Create Account'
-                        label='Label with htmlFor'
-            />
-
+        <Form.Field
+          id="form-imput-control-email"
+          control={Input}
+          label="Email"
+          placeholder="youremail@gmail.com"
+        />
+        <Form.Group widths="equal">
+          <Form.Field
+            id="form-imput-control-password"
+            control={Input}
+            label="Password"
+            type="password"
+          />
+          <Form.Field
+            id="form-imput-control-password-confirmation"
+            control={Input}
+            label="Password Confirmation"
+            type="password"
+          />
+        </Form.Group>
+        <Form.Field
+          id="form-button-control-public"
+          control={Button}
+          content="Create Account"
+          label="Label with htmlFor"
+        />
       </Form>
     </div>
-
-  )
+  );
 }
 
 export default SignUpPage;
