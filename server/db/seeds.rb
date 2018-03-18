@@ -1,10 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
 PASSWORD = 'supersecret'
 
 User.destroy_all
@@ -70,8 +63,10 @@ quizzes = Quiz.all
 questions = Question.all
 answers = Answer.all
 
+
 puts Cowsay.say "Created #{users.count} users", :tux
 puts Cowsay.say "Created #{quizzes.count} quizzes", :tux
 puts Cowsay.say "Created #{questions.count} questions", :tux
 puts Cowsay.say "Created #{answers.count} answers", :tux
 puts "Login as admin #{super_user.email} and password of '#{PASSWORD}'"
+
