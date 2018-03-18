@@ -7,6 +7,7 @@ class V1::TokensController < ApplicationController
       render json: {
         jwt: encode_token({
             id: user.id,
+            is_admin: user.is_admin,
             first_name: user.first_name,
             last_name: user.last_name,
             email: user.email,

@@ -38,7 +38,11 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
 
   def authenticate_user!
-    head :unauthorized unless current_user.present?
+    unless current_user.present?
+      render(
+        json: { errors: [{ type: "Unauthorized" }] }, status: :unauthorized
+      )
+    end
   end
 
   def encode_token(payload = {}, exp = 24.hours.from_now)

@@ -1,40 +1,57 @@
 class V1::QuizTakensController < ApplicationController
+  before_action :find_quiz_taken, only: [:update]
 
   def create
-    qt = QuizTaken.new quiz_taken_params
+    qt = QuizTaken.new(user_id: params[:user_id], quiz_id: params[:quiz_id])
     qt.question = qt.quiz.questions.order(:id).first
     qt.correct_answers = 0
     qt.save!
   end
 
   def update
+    # Compare user's input string for a question and check if it is found in the answers.
     input_string = params[:input_string]
     correct_input = !!@qt.question.answers.find { |answer| answer.body === input_string }
 
     @qt.correct_answers += 1 if correct_input
 
     if @qt.question_id === @qt.quiz.questions.order(:id).last.id
+      # If this was the last question, calculate results of quiz. For the evaluated
+      # quiz, compare the previous max scor e with the current one. Increase the
+      # user's total score by the difference.
+      previous_array = QuizTaken.where(user_id: @qt.user_id, quiz_id: @qt.quiz_id).map { |qt| qt.score }
+      previous_max = previous_array.max
+
       correct_answers = @qt.correct_answers
       total_questions = @qt.quiz.questions.count
-      score_percentage = correct_answers / total_questions * 100
+      quiz_points = @qt.quiz.quiz_points
 
-      @qt.score = @qt.quiz.quiz_points * correct_answers / total_questions
+      @qt.score = quiz_points * correct_answers / total_questions
+      @qt.score = quiz_points if @qt.score > quiz_points
 
-      render json: @qt
+      @qt.save
+
+      now_array = QuizTaken.where(user_id: @qt.user_id, quiz_id: @qt.quiz_id).map { |qt| qt.score }
+      now_max = now_array.max
+
+      user = User.find @qt.user_id
+      user.total_score = user.total_score - previous_max + now_max
+      user.number_of_badges += 1 if previous_max != quiz_points && now_max == quiz_points
+      user.save
+
     else
-      current_question_index = @qt.quiz.questions.order(:id).index{ |question| question.id = @qt.question_id }
+      # Else, increase the question index of the evaluated quiz by one.
+      current_question_index = @qt.quiz.questions.order(:id).index{ |question| question.id == @qt.question_id }
       @qt.question = @qt.quiz.questions.order(:id)[current_question_index + 1]
+      @qt.save
     end
+    render json: @qt
   end
 
   private
 
-  def quiz_taken_params
-    params.require(:quiz_taken).permit(:user_id, :quiz_id)
-  end
-
   def find_quiz_taken
-    @qt = QuizTaken.find_by(id: params[:id])
+    @qt = QuizTaken.find_by(id: params[:quiz_taken_id])
   end
 
 end

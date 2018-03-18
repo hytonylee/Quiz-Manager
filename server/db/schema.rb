@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180318010149) do
+ActiveRecord::Schema.define(version: 20180318164833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180318010149) do
     t.bigint "quiz_id"
     t.bigint "question_id"
     t.integer "correct_answers"
-    t.integer "score"
+    t.integer "score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_quiz_takens_on_question_id"
@@ -62,9 +62,8 @@ ActiveRecord::Schema.define(version: 20180318010149) do
     t.boolean "is_admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "total_score"
-    t.integer "number_of_badges"
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.integer "total_score", default: 0
+    t.integer "number_of_badges", default: 0
   end
 
   add_foreign_key "answers", "questions"
