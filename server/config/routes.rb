@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:new, :create, :index, :show], shallow: true do
       post "reset_password", on: :collection
-      resources :quiz_takens, only: [:create, :update]
+      resources :quiz_takens, only: [:create, :update, :index]
     end
     resources :quizzes, only: [:create, :index, :show, :update, :destroy], shallow: true do
       resources :questions, only: [:create, :show, :update, :destroy] do

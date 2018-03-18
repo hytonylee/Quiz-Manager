@@ -1,5 +1,6 @@
 class V1::AnswersController < ApplicationController
   before_action :find_answer, only: [:update, :destroy]
+  before_action :authorize_user!
   def create
     answer = Answer.new answer_params
     answer.question = Question.find_by(id: params[:question_id])
@@ -27,4 +28,12 @@ class V1::AnswersController < ApplicationController
     @answer = Answer.find_by(id: params[:id])
   end
 
+  def authorize_user!
+    unless can?(:manage, :all)
+      flash[:alert] = 'Access Denied!'
+      render(
+        json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
+      )
+    end
+  end
 end
