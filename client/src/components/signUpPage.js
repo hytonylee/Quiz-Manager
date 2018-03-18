@@ -8,10 +8,7 @@ class SignUpPage extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  // Another way of writing the same thing:
-  // function emptyFunction() {}
-  // const onSubmit = props.onSubmit || emptyFunction;
-
+ 
   handleSubmit(event) {
     const { onSignUp = () => {} } = this.props;
     event.preventDefault();
@@ -59,6 +56,7 @@ class SignUpPage extends Component {
                 name="last_name"
               />
             </Form.Field>
+      
           </Form.Group>
 
           <Form.Field>
@@ -90,6 +88,7 @@ class SignUpPage extends Component {
               />
             </Form.Field>
           </Form.Group>
+      
           <Form.Field>
             <Button
               id="form-button-control-public"
@@ -97,6 +96,7 @@ class SignUpPage extends Component {
               content="Create Account"
             />
           </Form.Field>
+      
         </Form>{" "}
       </div>
     );

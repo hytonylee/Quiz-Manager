@@ -8,6 +8,7 @@ class SignInPage extends Component {
     this.state = {
       errors: []
     };
+
     this.createToken = this.createToken.bind(this);
   }
 

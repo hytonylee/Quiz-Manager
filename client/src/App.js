@@ -1,3 +1,4 @@
+
 import React from "react";
 import jwtDecode from "jwt-decode";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -5,6 +6,7 @@ import Homepage from "./components/Homepage";
 import SignInPage from "./components/SignInPage";
 import SignUpPage from "./components/SignUpPage";
 import QuestionShow from "./components/QuestionShow";
+import QuestionForm from './components/QuestionForm'
 import QuizIndex from "./components/QuizIndex";
 import Leaderboard from "./components/Leaderboard";
 import AuthRoute from "./components/AuthRoute";
@@ -86,6 +88,7 @@ class App extends React.Component {
         </Switch>
       </Router>
     );
+
   }
 }
 
