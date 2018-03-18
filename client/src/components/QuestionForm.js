@@ -33,7 +33,7 @@ class QuestionForm extends React.Component {
     }
 
     for (let i = 0; i < answerBodies.length; i += 1) {
-      answers_attribute[`${i}`] = answerBodies[i]
+      outputObj.answers_attribute[`${i}`] = answerBodies[i]
     }
 
     Question.create(outputObj)
