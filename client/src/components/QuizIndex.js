@@ -1,11 +1,19 @@
-import React, { Component } from 'react';
-import { Quiz } from '../lib/requests';
-import { Link } from 'react-router-dom';
-import { Card, Button, CardTitle, CardText, Row, Col, Container} from 'reactstrap';
+import React, { Component } from "react";
+import { Quiz } from "../lib/requests";
+import { Link } from "react-router-dom";
+import {
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+  Container
+} from "reactstrap";
 
 class QuizIndex extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       quizzes: []
@@ -22,41 +30,37 @@ class QuizIndex extends Component {
         // loading: false
       });
     });
-
   }
 
-    addQuiz (addQuiz) {
-      const {quizzes} = this.state;
-    }
+  addQuiz(addQuiz) {
+    const { quizzes } = this.state;
+  }
 
-    deleteQuiz (event) {
-      const {currentTarget} = event
-      const {quizs} this.state;
-      const quizId = parseInt(currentTarget.dataset.id 10);
+  deleteQuiz(event) {
+    const { currentTarget } = event;
+    const { quizzes } = this.state;
+    const quizId = parseInt(currentTarget.dataset.id, 10);
 
-      this.setState({
-        quizzes: quizzes
-          .filter(quiz => quiz.id !== quizId)
-      })
-    }
-
+    this.setState({
+      quizzes: quizzes.filter(quiz => quiz.id !== quizId)
+    });
+  }
 
   render() {
-
-//     const { quizzes } = this.state;
-//     console.log(quizzes);
-//     return (
-//       <div>
-//         <h2>QuizIndex Placeholder</h2>
-//         {quizzes.map(quiz => (
-//           <div key={quiz.id}>
-//             <h4>{quiz.name}</h4>
-//             <p>{quiz.description}</p>
-//             <br />
-//           </div>
-//         ))}
-//       </div>
-//     );
+    //     const { quizzes } = this.state;
+    //     console.log(quizzes);
+    //     return (
+    //       <div>
+    //         <h2>QuizIndex Placeholder</h2>
+    //         {quizzes.map(quiz => (
+    //           <div key={quiz.id}>
+    //             <h4>{quiz.name}</h4>
+    //             <p>{quiz.description}</p>
+    //             <br />
+    //           </div>
+    //         ))}
+    //       </div>
+    //     );
     const { quizzes, loading } = this.state;
 
     if (loading) {
@@ -64,51 +68,60 @@ class QuizIndex extends Component {
         <main className="QuizIndex">
           <Container>
             <Row>
-              <Col xs="6"><h2> Quiz Group </h2></Col>
               <Col xs="6">
-                <Button outline color="secondary" onClick={this.addQUiz}>Add Quiz</Button>
+                <h2> Quiz Group </h2>
+              </Col>
+              <Col xs="6">
+                <Button outline color="secondary" onClick={this.addQUiz}>
+                  Add Quiz
+                </Button>
               </Col>
             </Row>
             <Row>
-              <Col> <h4> Loading... </h4> </Col>
+              <Col>
+                {" "}
+                <h4> Loading... </h4>{" "}
+              </Col>
             </Row>
           </Container>
         </main>
-      )
+      );
     }
 
     return (
-      <main
-        className="QuizIndex">
-          <Container>
-            <Row>
-              <Col xs="6"><h2> Quiz Group </h2></Col>
-              <Col xs="6">
-                <Button outline color="secondary" onClick={this.addQUiz}>Add Quiz</Button>
+      <main className="QuizIndex">
+        <Container>
+          <Row>
+            <Col xs="6">
+              <h2> Quiz Group </h2>
+            </Col>
+            <Col xs="6">
+              <Button outline color="secondary" onClick={this.addQUiz}>
+                Add Quiz
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            {quizzes.map(quiz => (
+              <Col sm="6">
+                <Card body key={quiz.id}>
+                  <CardTitle>
+                    <Link to={`/quizzes/${quiz.id}`} />
+                    {quiz.name}
+                  </CardTitle>
+                  <CardText>
+                    <p>{quiz.description}</p>
+                  </CardText>
+                  <button data-id={quiz.id} onClick={this.deleteQuiz}>
+                    Delete
+                  </button>
+                </Card>
               </Col>
-            </Row>
-            <Row>
-              {quizzes.map( quiz => 
-                <Col sm="6">
-                  <Card body key={quiz.id}>
-                    <CardTitle>
-                      <Link to{/quizzes/$quiz.id} />
-                        {quiz.name}
-                    </CardTitle>
-                    <CardText>
-                        <p>{quiz.description}</p>
-                    </CardText>
-                    <button
-                          data-id={quiz.id}
-                          onClick={this.deleteQuiz}
-                        >Delete</button>
-                  </Card>
-                </Col>
-              }
-            </Row>
-          </Container>
+            ))}
+          </Row>
+        </Container>
       </main>
-    )
+    );
   }
 }
 
