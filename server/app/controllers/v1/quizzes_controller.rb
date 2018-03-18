@@ -1,7 +1,7 @@
 class V1::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_quiz, only: [:show, :update, :destroy]
-  before_action :authorize_user!, except: [:index]
+  before_action :authorize_user!, except: [:index, :show]
 
   def index
     render json: Quiz.order(:id)

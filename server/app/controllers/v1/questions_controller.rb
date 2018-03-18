@@ -1,7 +1,7 @@
 class V1::QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_question, only: [:show, :update, :destroy]
-  before_action :authorize_user!
+  before_action :authorize_user!, except: [:show]
 
 
   def create

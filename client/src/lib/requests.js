@@ -127,4 +127,6 @@ const User = {
   }
 };
 
-export { Quiz, Question, Token, User };
+const QuizTaken = {};
+
+export { Quiz, Question, Token, User, QuizTaken };
