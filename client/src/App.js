@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Homepage from "./components/Homepage";
 import SignInPage from "./components/SignInPage";
+import SignUpPage from "./components/SignUpPage";
 import QuestionShow from "./components/QuestionShow";
 import QuizIndex from "./components/QuizIndex";
 import Leaderboard from "./components/Leaderboard";
@@ -53,6 +54,13 @@ class App extends React.Component {
           <Route exact path="/" component={Homepage} />
 
           <Route
+            exact
+            path="/sign_up"
+            render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
+          />
+
+          <Route
+            exact
             path="/sign_in"
             render={props => <SignInPage {...props} onSignIn={this.signIn} />}
           />

@@ -99,6 +99,17 @@ const Token = {
 };
 
 const User = {
+  create(params) {
+    console.log(params);
+    return fetch(`${BASE_URL}/users`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    }).then(res => res.json());
+  },
+  //----------------------------------------------
   one(id) {
     return fetch(`${BASE_URL}/users/${id}`, {
       headers: {

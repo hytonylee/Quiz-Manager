@@ -8,32 +8,22 @@ class QuizIndex extends Component {
     super(props)
 
     this.state = {
-      quizzes: [],
-      loading: true,
-      modal: false
-    }
+      quizzes: []
+    };
     this.deleteQuiz = this.deleteQuiz.bind(this);
     this.addQuiz = this.addQuiz.bind(this);
   }
 
+  componentDidMount() {
+    Quiz.all().then(quizzes => {
+      this.setState({
+        quizzes: quizzes
+        // ,
+        // loading: false
+      });
+    });
 
-    })
   }
-
-
-
-  componentDidMount () {
-      Quiz
-        .all()
-        .then(
-          questions => {
-            this.setState({
-              questions: questions,
-              loading: false
-            });
-          }
-        );
-    }
 
     addQuiz (addQuiz) {
       const {quizzes} = this.state;
@@ -52,6 +42,21 @@ class QuizIndex extends Component {
 
 
   render() {
+
+//     const { quizzes } = this.state;
+//     console.log(quizzes);
+//     return (
+//       <div>
+//         <h2>QuizIndex Placeholder</h2>
+//         {quizzes.map(quiz => (
+//           <div key={quiz.id}>
+//             <h4>{quiz.name}</h4>
+//             <p>{quiz.description}</p>
+//             <br />
+//           </div>
+//         ))}
+//       </div>
+//     );
     const { quizzes, loading } = this.state;
 
     if (loading) {
@@ -104,7 +109,6 @@ class QuizIndex extends Component {
           </Container>
       </main>
     )
-
   }
 }
 

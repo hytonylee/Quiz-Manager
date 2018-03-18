@@ -11,9 +11,16 @@ class V1::UsersController < ApplicationController
     user = User.new user_params
   end
 
+  # def create
+  #   question = Question.new question_params
+  #   question.user = current_user
+  #   question.save!
+  #   render json: {id: question.id}
+  # end
+
   def create
    user = User.new user_params
-   if user.save
+    user.save!
      render json: {
        jwt: encode_token({
            id: user.id,
@@ -23,19 +30,19 @@ class V1::UsersController < ApplicationController
            full_name: user.full_name
        })
      }
-   else
-      errors = error.record.errors.map do |field, message|
-        {
-          type: error.class.to_s,
-          record_type: error.record.class.to_s,
-          field: field,
-          message: message
-        }
-      end
-      render(
-        json: { errors: errors }, status: :unprocessable_entity
-      )
-   end
+   # else
+   #    errors = errors.record.errors.map do |field, message|
+   #      {
+   #        type: errors.class.to_s,
+   #        record_type: errors.record.class.to_s,
+   #        field: field,
+   #        message: message
+   #      }
+   #    end
+   #    render(
+   #      json: { errors: errors }, status: :unprocessable_entity
+   #    )
+   # end
   end
 
   def reset_password

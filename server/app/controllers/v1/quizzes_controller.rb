@@ -1,7 +1,7 @@
 class V1::QuizzesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_quiz, only: [:show, :update, :destroy]
-  before_action :authorize_user!
+  before_action :authorize_user!, except: [:index]
 
   def index
     render json: Quiz.order(:id)
@@ -38,7 +38,7 @@ class V1::QuizzesController < ApplicationController
 
   def authorize_user!
     unless can?(:manage, :all)
-      flash[:alert] = 'Access Denied!'
+      # flash[:alert] = 'Access Denied!'
       render(
         json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
       )
