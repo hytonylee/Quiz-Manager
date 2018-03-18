@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { User } from "../lib/requests";
-import { Container, Divider, Form, Input, Button, Icon } from "semantic-ui-react";
-import "bootstrap/dist/css/bootstrap.css";
+import { Form, Input, Button } from "semantic-ui-react";
 // import {User} from '../lib/requests';
 
 class SignUpPage extends Component {
@@ -9,7 +8,10 @@ class SignUpPage extends Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
- 
+  // Another way of writing the same thing:
+  // function emptyFunction() {}
+  // const onSubmit = props.onSubmit || emptyFunction;
+
   handleSubmit(event) {
     const { onSignUp = () => {} } = this.props;
     event.preventDefault();
@@ -33,21 +35,22 @@ class SignUpPage extends Component {
   }
   render() {
     return (
+      <div className="signUpPage">
+        <h1>Sign Up</h1>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group widths="equal">
+            <Form.Field>
+              <label>First Name</label>
 
-      <div className="SignUpPage">
-        <Container textAlign="center" className="homepage-container mt-3">
-          <Icon name="setting" size="huge" color="red" className="m-5" />
-          <Icon name="checkmark" size="huge" color="red" className="m-5" />
-          <Icon
-            name="location arrow"
-            size="huge"
-            color="red"
-            className="m-5"
-          />
-        </Container>
-        <Divider />
-        <Container>
-
+              <input
+                placeholder="First Name"
+                id="form-imput-control-first-name"
+                type="text"
+                name="first_name"
+              />
+            </Form.Field>
+            <Form.Field>
+              <label>Last Name</label>
 
               <input
                 placeholder="Last Name"
@@ -56,48 +59,37 @@ class SignUpPage extends Component {
                 name="last_name"
               />
             </Form.Field>
-      
           </Form.Group>
 
+          <Form.Field>
+            <label>Email</label>
+            <input
+              placeholder="Email"
+              id="form-imput-control-email"
+              type="email"
+              name="email"
+            />
+          </Form.Field>
+          <Form.Group widths="equal">
             <Form.Field>
-              <label>Email</label>
+              <label>Password</label>
               <input
-                placeholder="Email"
-                id="form-imput-control-email"
-                type="email"
-                name="email"
+                placeholder="Password"
+                id="form-imput-control-password"
+                type="password"
+                name="password"
               />
             </Form.Field>
-            <Form.Group widths="equal">
-              <Form.Field>
-                <label>Password</label>
-                <input
-                  placeholder="Password"
-                  id="form-imput-control-password"
-                  type="password"
-                  name="password"
-                />
-              </Form.Field>
-              <Form.Field>
-                <label>Password Confirmation</label>
-                <input
-                  placeholder="Password Confirmation"
-                  id="form-imput-control-password-confirmation"
-                  type="password"
-                  name="password_confirmation"
-                />
-              </Form.Field>
-            </Form.Group>
             <Form.Field>
-              <Button
-                id="form-button-control-public"
-                type="submit"
-                content="Create Account"
+              <label>Password Confirmation</label>
+              <input
+                placeholder="Password Confirmation"
+                id="form-imput-control-password-confirmation"
+                type="password"
+                name="password_confirmation"
               />
             </Form.Field>
-
           </Form.Group>
-      
           <Form.Field>
             <Button
               id="form-button-control-public"
@@ -105,7 +97,6 @@ class SignUpPage extends Component {
               content="Create Account"
             />
           </Form.Field>
-      
         </Form>{" "}
       </div>
     );
@@ -113,49 +104,3 @@ class SignUpPage extends Component {
 }
 
 export default SignUpPage;
-
-{
-  /* <Form onSubmit={this.handleSubmit}>
-  <Form.Group widths="equal">
-    <Form.Field
-      id="form-input-control-first-name"
-      control={Input}
-      label="First name"
-      placeholder="First name"
-    />
-    <Form.Field
-      id="form-imput-control-last-name"
-      control={Input}
-      label="Last name"
-      placeholder="Last name"
-    />
-  </Form.Group>
-
-  <Form.Field
-    id="form-imput-control-email"
-    control={Input}
-    label="Email"
-    placeholder="youremail@gmail.com"
-  />
-  <Form.Group widths="equal">
-    <Form.Field
-      id="form-imput-control-password"
-      control={Input}
-      label="Password"
-      type="password"
-    />
-    <Form.Field
-      id="form-imput-control-password-confirmation"
-      control={Input}
-      label="Password Confirmation"
-      type="password"
-    />
-  </Form.Group>
-  <Form.Field
-    id="form-button-control-public"
-    control={Button}
-    content="Create Account"
-  />
-</Form>
- */
-}
