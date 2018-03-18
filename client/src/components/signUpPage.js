@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { User } from "../lib/requests";
-import { Form, Input, Button } from "semantic-ui-react";
+import { Container, Divider, Form, Input, Button, Icon } from "semantic-ui-react";
+import "bootstrap/dist/css/bootstrap.css";
 // import {User} from '../lib/requests';
 
 class SignUpPage extends Component {
@@ -32,22 +33,21 @@ class SignUpPage extends Component {
   }
   render() {
     return (
-      <div className="signUpPage">
-        <h1>Sign Up</h1>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group widths="equal">
-            <Form.Field>
-              <label>First Name</label>
 
-              <input
-                placeholder="First Name"
-                id="form-imput-control-first-name"
-                type="text"
-                name="first_name"
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Last Name</label>
+      <div className="SignUpPage">
+        <Container textAlign="center" className="homepage-container mt-3">
+          <Icon name="setting" size="huge" color="red" className="m-5" />
+          <Icon name="checkmark" size="huge" color="red" className="m-5" />
+          <Icon
+            name="location arrow"
+            size="huge"
+            color="red"
+            className="m-5"
+          />
+        </Container>
+        <Divider />
+        <Container>
+
 
               <input
                 placeholder="Last Name"
@@ -59,34 +59,43 @@ class SignUpPage extends Component {
       
           </Form.Group>
 
-          <Form.Field>
-            <label>Email</label>
-            <input
-              placeholder="Email"
-              id="form-imput-control-email"
-              type="email"
-              name="email"
-            />
-          </Form.Field>
-          <Form.Group widths="equal">
             <Form.Field>
-              <label>Password</label>
+              <label>Email</label>
               <input
-                placeholder="Password"
-                id="form-imput-control-password"
-                type="password"
-                name="password"
+                placeholder="Email"
+                id="form-imput-control-email"
+                type="email"
+                name="email"
               />
             </Form.Field>
+            <Form.Group widths="equal">
+              <Form.Field>
+                <label>Password</label>
+                <input
+                  placeholder="Password"
+                  id="form-imput-control-password"
+                  type="password"
+                  name="password"
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Password Confirmation</label>
+                <input
+                  placeholder="Password Confirmation"
+                  id="form-imput-control-password-confirmation"
+                  type="password"
+                  name="password_confirmation"
+                />
+              </Form.Field>
+            </Form.Group>
             <Form.Field>
-              <label>Password Confirmation</label>
-              <input
-                placeholder="Password Confirmation"
-                id="form-imput-control-password-confirmation"
-                type="password"
-                name="password_confirmation"
+              <Button
+                id="form-button-control-public"
+                type="submit"
+                content="Create Account"
               />
             </Form.Field>
+
           </Form.Group>
       
           <Form.Field>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Divider, Container, Button, Form, Icon } from "semantic-ui-react";
 import { Token } from "../lib/requests";
+import "bootstrap/dist/css/bootstrap.css";
 
 class SignInPage extends Component {
   constructor(props) {
@@ -38,8 +39,23 @@ class SignInPage extends Component {
   render() {
     console.log(this.props);
     console.log(this.state);
+    
     return (
       <main className="SignInPage" style={{ margin: "0 1rem" }}>
+
+        <Container textAlign="center" className="homepage-container mt-3">
+          <Icon name="setting" size="huge" color="red" className="m-5" />
+          <Icon name="checkmark" size="huge" color="red" className="m-5" />
+          <Icon
+            name="location arrow"
+            size="huge"
+            color="red"
+            className="m-5"
+          />
+        </Container>
+
+        <Divider />
+
         <h2>Sign In</h2>
         {this.state.errors.map((e, i) => (
           <div className="alert" key={i}>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Divider, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "../index.css";
 import SignUpPage from "./SignUpPage";
