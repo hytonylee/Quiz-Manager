@@ -3,6 +3,7 @@ class V1::QuestionsController < ApplicationController
   before_action :find_question, only: [:show, :update, :destroy]
   before_action :authorize_user!
 
+
   def create
     question = Question.new question_params
     question.quiz = Quiz.find_by(id: params[:quiz_id])
@@ -33,7 +34,7 @@ class V1::QuestionsController < ApplicationController
   def find_question
     @question = Question.find_by(id: params[:id])
   end
-  
+
   def authorize_user!
     unless can?(:manage, :all)
       flash[:alert] = 'Access Denied!'

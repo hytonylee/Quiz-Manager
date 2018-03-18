@@ -33,7 +33,7 @@ class V1::QuizzesController < ApplicationController
   end
 
   def find_quiz
-    @quiz = Quiz.find_by(id: params[:id])
+    @quiz = Quiz.find_by!(id: params[:id])
   end
 
   def authorize_user!
