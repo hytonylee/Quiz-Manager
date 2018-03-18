@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   namespace :v1 do
+    # post "reset_password", to: "users#reset_password"
+
     resources :users, only: [:new, :create, :index, :show], shallow: true do
+      post "reset_password", on: :collection
       resources :quiz_takens, only: [:create, :update]
     end
     resources :quizzes, only: [:create, :index, :show, :update, :destroy], shallow: true do

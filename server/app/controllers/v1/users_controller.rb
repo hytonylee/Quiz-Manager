@@ -1,7 +1,7 @@
 class V1::UsersController < ApplicationController
 
-  before_action :authenticate_user!, except: [:create]
-  before_action :authorize_user!, except: [:create]
+  before_action :authenticate_user!, except: [:create, :reset_password]
+  before_action :authorize_user!, except: [:create, :reset_password]
 
   def index
     render json: User.order(:id)
@@ -38,9 +38,16 @@ class V1::UsersController < ApplicationController
    end
   end
 
-  # def show
-  #   user = User.find params[:id]
-  # end
+  def reset_password
+    user = User.find(params[:id])
+
+    UserMailer
+        .notify_user(user)
+        .deliver_now
+      render(
+        json: { message: 'Email Sent' }, status: :sucess
+      )
+  end
 
   private
   def user_params

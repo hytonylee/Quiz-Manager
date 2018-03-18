@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20180318164833) do
     t.datetime "updated_at", null: false
     t.integer "total_score", default: 0
     t.integer "number_of_badges", default: 0
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "answers", "questions"
