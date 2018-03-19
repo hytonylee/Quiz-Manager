@@ -13,7 +13,7 @@ class QuizNew extends Component {
 
   }
 
-  createQuize (quizParams) {
+  createQuiz (quizParams) {
     Quiz
       .create(quizParams)
       .then(data => {

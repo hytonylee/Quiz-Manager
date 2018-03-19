@@ -12,7 +12,10 @@ import QuizShow from "./components/QuizShow";
 import Leaderboard from "./components/Leaderboard";
 import AuthRoute from "./components/AuthRoute";
 import QuizCreate from "./components/QuizCreate";
-import AdminDashboard from "./components/AdminDashboard";
+import AdminDashboard from './components/AdminDashboard';
+import QuizEdit from './components/QuizEdit';
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -77,6 +80,17 @@ class App extends React.Component {
             />
 
 
+
+    
+ 
+          <AuthRoute
+            isAuthenticated={this.isSignedIn()}
+            exact
+            path="/quizzes/:quizId"
+            component={QuizEdit}
+         />
+
+
             <Route
               exact
               path="/sign_in"
@@ -116,13 +130,7 @@ class App extends React.Component {
               path="/dashboard"
               component={AdminDashboard}
             />
-            {/* <AuthRoute
 
-            isAuthenticated={this.isSignedIn()}
-            exact
-            path="/quizzes/:quizId/question/:questionId/edit"
-            component={QuestionForm}
-          /> */}
           </Switch>
         </div>
       </Router>

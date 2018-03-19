@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { User } from "../lib/requests";
-import { Form, Input, Button } from "semantic-ui-react";
+import { Form, Input, Button, Icon, Divider, Container } from "semantic-ui-react";
 // import {User} from '../lib/requests';
 
 class SignUpPage extends Component {
@@ -35,7 +35,23 @@ class SignUpPage extends Component {
   }
   render() {
     return (
-      <div className="signUpPage">
+      <div className="SignUpPage">
+
+        <Container textAlign="center" className="homepage-container mt-3">
+          <Icon name="setting" size="huge" color="red" className="m-5" />
+          <Icon name="checkmark" size="huge" color="red" className="m-5" />
+          <Icon
+            name="location arrow"
+            size="huge"
+            color="red"
+            className="m-5"
+          />
+        </Container>
+
+        <Divider />
+
+        <Container>
+
         <h1>Sign Up</h1>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group widths="equal">
@@ -98,7 +114,11 @@ class SignUpPage extends Component {
             />
           </Form.Field>
         </Form>{" "}
+
+
+        </Container>
       </div>
+
     );
   }
 }
