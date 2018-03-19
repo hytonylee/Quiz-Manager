@@ -1,47 +1,64 @@
 import React from 'react';
-import { Col, Button, Label, Input, Form, FormGroup, Alert } from 'reactstrap';
+import { Icon, Divider, Radio, Form, Container, TextArea} from 'semantic-ui-react';
+
+import { User } from '../lib/requests';
+
 
 class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      visible: true
+      visible: false
     };
 
-    this.onDismiss = this.onDismiss.bind(this);
+    this.sendEmail = this.sendEmail.bind(this);
   }
 
-  onDismiss() {
-    this.setState({ visible: false });
+  sendEmail(event) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    User.reset({
+      email: formData.get("email")
+    })
+    this.setState({ visible: true });
   }
-  
+
 
   render() {
     return (
-      <div className="container">
-        <main className='ResetPassword'>
+      <main className="ResetPassword" style={{ margin: "0 1rem" }}>
 
-          <h1>Reset Password</h1>
+        <Container textAlign="center" className="homepage-container mt-3">
+          <Icon name="setting" size="massive" color="red" className="m-5" />
+          <Icon name="checkmark" size="massive" color="red" className="m-5" />
+          <Icon
+            name="location arrow"
+            size="massive"
+            color="red"
+            className="m-5"
+          />
+        </Container>
 
-          <Alert color="success" isOpen={this.state.visible} toggle={this.onDismiss} className="Alert">
-            <p>Password Reset Instruction has been sent to your
-              email address.</p>
-          </Alert>
+        <Divider />
+        <h1>Reset Password</h1>
 
-          <Form className="form_border">
-            <FormGroup row>
-                <Label for="exampleEmail" sm={2}>Email</Label>
-                <Col sm={10}>
-                  <Input type="email" name="email" id="exampleEmail" placeholder="please enter your email address here" />
-                </Col>
-              </FormGroup>
-            <Button>Submit</Button>
-          </Form>
+        <Form onSubmit={this.sendEmail} >
+          <Form.Field>
+            <label>Email</label>
 
-        </main>
-      </div>
-    );
+            <input
+              id="email"
+              type="email"
+              name="email"
+            />
+          </Form.Field>
+          <Form.Button>Submit</Form.Button>
+        </Form>
+
+
+      </main>
+    )
   }
 }
 

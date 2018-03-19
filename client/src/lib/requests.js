@@ -142,6 +142,15 @@ const User = {
         Authorization: getJWT()
       }
     }).then(res => res.json());
+  },
+  reset(params) {
+    return fetch(`${BASE_URL}/users/reset_password`, {
+      headers: {
+        "Content-Type": "application/json"
+      },
+      method: "POST",
+      body: JSON.stringify(params)
+    })
   }
 };
 

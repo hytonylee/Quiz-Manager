@@ -2,8 +2,10 @@ import React from "react";
 import jwtDecode from "jwt-decode";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Homepage from "./components/Homepage";
+import NotFound from "./components/NotFound";
 import SignInPage from "./components/SignInPage";
 import SignUpPage from "./components/SignUpPage";
+import ResetPassword from "./components/ResetPassword";
 import QuestionShow from "./components/QuestionShow";
 import QuestionForm from "./components/QuestionForm";
 import NavBarUser from "./components/NavBarUser";
@@ -70,6 +72,12 @@ class App extends React.Component {
               render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
             />
 
+            <Route
+              exact
+              path="/reset_password"
+              component={ResetPassword}
+            />
+
 
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
@@ -81,8 +89,8 @@ class App extends React.Component {
 
 
 
-    
- 
+
+
           <AuthRoute
             isAuthenticated={this.isSignedIn()}
             exact
@@ -130,7 +138,7 @@ class App extends React.Component {
               path="/dashboard"
               component={AdminDashboard}
             />
-
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>

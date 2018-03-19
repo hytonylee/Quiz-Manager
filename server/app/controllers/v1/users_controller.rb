@@ -50,7 +50,7 @@ class V1::UsersController < ApplicationController
   end
 
   def reset_password
-    user = User.find(params[:id])
+    user = User.find_by(email: params[:email])
 
     UserMailer
         .notify_user(user)

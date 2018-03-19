@@ -27,11 +27,11 @@ class AdminDashboard extends React.Component {
     return (
       <Container>
         <Row>
-          <Col xs="10">
+          <Col s="10">
             <ListGroup>
               <p></p>
               <h1>Admin Dashboard</h1>
-              <ListGroupItem className="userSummary header">
+              <ListGroupItem className="userSummary dashboard header">
                 <div className="firstName">First Name</div>
                 <div className="lastName">Last Name</div>
                 <div className="totalScore">Points</div>
@@ -39,7 +39,7 @@ class AdminDashboard extends React.Component {
                 <div className="email">Email</div>
               </ListGroupItem>
               {users.map(user => (
-                <ListGroupItem className="userSummary" key={user.id}>
+                <ListGroupItem className="userSummary dashboard" key={user.id}>
                   <div className="firstName">{user.first_name}</div>
                   <div className="lastName">{user.last_name}</div>
                   <div className="totalScore">{user.total_score}</div>

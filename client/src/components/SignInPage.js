@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom"
 import { Divider, Container, Button, Form, Icon } from "semantic-ui-react";
 import { Token } from "../lib/requests";
 import "bootstrap/dist/css/bootstrap.css";
@@ -39,7 +40,7 @@ class SignInPage extends Component {
   render() {
     console.log(this.props);
     console.log(this.state);
-    
+
     return (
       <main className="SignInPage" style={{ margin: "0 1rem" }}>
 
@@ -77,7 +78,7 @@ class SignInPage extends Component {
             <label>Password</label>
             <input type="password" id="password" name="password" />
           </Form.Field>
-          <Button type="submit">Sign In</Button>
+          <Button type="submit">Sign In</Button> <small><Link to="/reset_password">Forgot Password?</Link></small>
         </Form>
       </main>
     );

@@ -61,8 +61,8 @@ li.userSummary.header {
   font-weight: bold;
 }
 
-li.userSummary > div {
-  width: 25%;
+li.userSummary.dashboard > div {
+  width: 20%;
 }
 
 li.questionList {
