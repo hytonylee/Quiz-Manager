@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Quiz } from "../lib/requests";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {
   Card,
   Button,
@@ -10,6 +10,7 @@ import {
   Col,
   Container
 } from "reactstrap";
+import "../index.css";
 
 class QuizIndex extends Component {
   constructor(props) {
@@ -71,9 +72,11 @@ class QuizIndex extends Component {
               <Col xs="6">
                 <h2> Quiz Group </h2>
               </Col>
-              <Col xs="6">
-                <Button outline color="secondary" onClick={this.addQUiz}>
-                  Add Quiz
+              <Col xs="6" >
+                <Button outline color="secondary" onClick={this.addQuiz} className="addQuiz">
+                  <NavLink exact to={'/QuizCreate'} >
+                    Add Quiz
+                  </NavLink>
                 </Button>
               </Col>
             </Row>
@@ -96,8 +99,10 @@ class QuizIndex extends Component {
               <h2> Quiz Group </h2>
             </Col>
             <Col xs="6">
-              <Button outline color="secondary" onClick={this.addQUiz}>
-                Add Quiz
+              <Button outline color="secondary" onClick={this.addQuiz}>
+                <NavLink exact to={'/QuizCreate'}>
+                  Add Quiz
+                </NavLink>
               </Button>
             </Col>
           </Row>

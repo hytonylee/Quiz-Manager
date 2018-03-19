@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 function NavBar(props) {
   const { user, onSignOut = () => {} } = props;
-  console.log(user.is_admin);
+  // console.log(user.is_admin);
 
   if (!user) {
     return <div />;

@@ -11,7 +11,9 @@ import QuizIndex from "./components/QuizIndex";
 import QuizShow from "./components/QuizShow";
 import Leaderboard from "./components/Leaderboard";
 import AuthRoute from "./components/AuthRoute";
+import QuizCreate from "./components/QuizCreate";
 import AdminDashboard from './components/AdminDashboard';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -55,6 +57,7 @@ class App extends React.Component {
     return (
       <Router>
         <div>
+
           <NavBarUser user={this.state.user} />
           <Switch>
             <Route exact path="/" component={Homepage} />
@@ -64,6 +67,7 @@ class App extends React.Component {
               path="/sign_up"
               render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
             />
+
           <Route
             exact
             path="/sign_in"
@@ -81,6 +85,12 @@ class App extends React.Component {
             exact
             path="/quizzes"
             component={QuizIndex}
+          />
+           <AuthRoute
+            isAuthenticated={this.isSignedIn()}
+            exact
+            path="/quizcreate"
+            component={QuizCreate}
           />
           <AuthRoute
             isAuthenticated={this.isSignedIn()}

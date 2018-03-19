@@ -43,6 +43,16 @@ nav {
   padding: 10px;
 }
 
+
+
+.NavBar {
+  margin-bottom: 50px;
+}
+
+.addQuiz {
+  width: 100;
+  margin-bottom: 2px
+
 li.userSummary {
   display: flex;
   flex-direction: row;
@@ -54,4 +64,5 @@ li.userSummary.header {
 
 li.userSummary > div {
   width: 25%;
+
 }
