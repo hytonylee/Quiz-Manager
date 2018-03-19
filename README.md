@@ -1,4 +1,4 @@
-This project was created as part of the CodeCore web development bootcamp (January 2018) cohort. It was completed using a rails API, a react front end, and copius amounts of caffeine.
+This project was created as part of the CodeCore web development bootcamp (January 2018 Cohort). It was completed using a rails API, a react front end, and copius amounts of caffeine.
 
 # Project Overview
 
