@@ -18,11 +18,9 @@ class QuizNew extends Component {
     });
   }
 
-  handleChange = (e, { value }) => this.setState({ value });
-
   handleSubmit(event) {
-    const { onSignUp = () => {} } = this.props;
     event.preventDefault();
+    const { onSignUp = () => {} } = this.props;
     const formData = new FormData(event.currentTarget);
     // debugger
 
@@ -66,6 +64,7 @@ class QuizNew extends Component {
             />
           </Form.Group>
           <Form.Group inline>
+
             <label>Difficulty</label>
             <Form.Field
               control={Radio}

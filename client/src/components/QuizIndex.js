@@ -153,6 +153,8 @@ class QuizIndex extends Component {
                 >
                   <Card.Content header={quiz.name} />
                   <Card.Content description={quiz.description} />
+                  <Card.Content content={`Difficulty: ${quiz.difficulty}`} />
+                  <Card.Content content={`Max Points: ${quiz.quiz_points}`} />
                   <Card.Content extra>
                     <div className="ui two buttons">
                       <Button id={quiz.id} basic color="green">
