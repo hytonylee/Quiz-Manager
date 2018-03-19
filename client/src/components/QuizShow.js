@@ -14,7 +14,6 @@ class QuizShow extends Component {
       loading: true
     };
     this.deleteQuestion = this.deleteQuestion.bind(this);
-    this.questionsRefresh = this.questionsRefresh.bind(this);
   }
 
   deleteQuestion(event) {
@@ -60,7 +59,10 @@ class QuizShow extends Component {
     console.log('quizxx:', quiz);
     return (
       <main className="QuizShow" style={{ margin: '0 1rem' }}>
-        <h2>Questions for quiz: {quiz.name}</h2>
+        <h2>Quiz Name: {quiz.name}</h2>
+        <p>Description for quiz: {quiz.description}</p>
+        <strong>Quiz Difficulty: {quiz.difficulty}</strong><br />
+        <strong>Quiz Total Points: {quiz.quit_points}</strong>
         <ul className="quiz-list">
           {this.state.questions.map( question => {
             return (

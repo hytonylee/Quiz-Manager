@@ -58,6 +58,7 @@ class QuizIndex extends Component {
 
     if (user.is_admin) {
       return (
+
         <Container>
           <Button
             basic
@@ -67,8 +68,9 @@ class QuizIndex extends Component {
               marginTop: "20px",
               marginBottom: "20px"
             }}
-          >
+          ><Link to="/quizcreate">
             New Quiz
+            </Link>
           </Button>
           <div
             className="ui two buttons"
@@ -113,7 +115,9 @@ class QuizIndex extends Component {
                   <Card.Content extra>
                     <div className="ui two buttons">
                       <Button id={quiz.id} basic color="green">
-                        View/Edit
+                        <Link to={`/quizzes/${quiz.id}/questions`}>
+                          View/Edit
+                        </Link>
                       </Button>
                       <Button
                         id={quiz.id}

@@ -37,6 +37,7 @@ class QuizNew extends Component {
         quiz_points: formData.get("quiz_points"),
       }
     }).then(data => {
+
       if (!data.errors) {
         // const jwt = data.jwt;
         // localStorage.setItem("jwt", jwt);
@@ -44,7 +45,7 @@ class QuizNew extends Component {
         // debugger
         // history.push("/quizzes");
         // return <Redirect to="/" push={true} />
-        this.props.history.push(`/quizzes`);
+        this.props.history.push(`/quizzes/${data.id}/questions`);
 
       }
     });

@@ -69,7 +69,7 @@ class App extends React.Component {
               render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
             />
 
-            
+
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
               user={this.state.user}
@@ -90,7 +90,7 @@ class App extends React.Component {
             path="/quizzes/:quizId/question/:questionId"
             component={QuestionShow}
           />
-          
+
            <AuthRoute
             isAuthenticated={this.isSignedIn()}
             exact
@@ -106,7 +106,7 @@ class App extends React.Component {
           <AuthRoute
             isAuthenticated={this.isSignedIn()}
             exact
-            path="/quizzes/:quizId"
+            path="/quizzes/:quizId/questions"
             component={QuizShow}
          />
           <AuthRoute
