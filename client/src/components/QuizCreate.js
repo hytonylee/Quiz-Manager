@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import { Quiz } from '../lib/requests';
+import React, { Component } from "react";
+import { Quiz } from "../lib/requests";
 
-import { Redirect } from 'react-router'
-import { Radio, Form, Container, TextArea} from 'semantic-ui-react';
+import { Redirect } from "react-router";
+import { Radio, Form, Container, TextArea } from "semantic-ui-react";
 
 class QuizNew extends Component {
   state = {};
-  constructor (props) {
+  constructor(props) {
     super(props);
     // this.createQuiz = this.createQuiz.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
 
-  createQuiz (quizParams) {
-    Quiz
-      .create(quizParams)
-      .then(data => {
-        const {id } = data;
-      })
+  createQuiz(quizParams) {
+    Quiz.create(quizParams).then(data => {
+      const { id } = data;
+    });
   }
 
-
-  handleChange = (e, { value }) => this.setState({ value })
+  handleChange = (e, { value }) => this.setState({ value });
 
   handleSubmit(event) {
     const { onSignUp = () => {} } = this.props;
@@ -35,10 +31,9 @@ class QuizNew extends Component {
         name: formData.get("name"),
         description: formData.get("description"),
         difficulty: formData.get("difficulty"),
-        quiz_points: formData.get("quiz_points"),
+        quiz_points: formData.get("quiz_points")
       }
     }).then(data => {
-
       if (!data.errors) {
         // const jwt = data.jwt;
         // localStorage.setItem("jwt", jwt);
@@ -47,31 +42,65 @@ class QuizNew extends Component {
         // history.push("/quizzes");
         // return <Redirect to="/" push={true} />
         this.props.history.push(`/quizzes/${data.id}/questions`);
-
       }
     });
   }
 
   render() {
-    const { value } = this.state
+    const { value } = this.state;
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
-          <Form.Group widths='equal'>
-            <Form.Input fluid label='Quiz name' placeholder='ex. JavaScript Recurring Method'  name="name"/>
-            <Form.Input fluid label='Points' placeholder='ex. 800' name="quiz_points" />
+          <Form.Group widths="equal">
+            <Form.Input
+              fluid
+              label="Quiz name"
+              placeholder="ex. JavaScript Recurring Method"
+              name="name"
+            />
+            <Form.Input
+              fluid
+              label="Points"
+              placeholder="ex. 800"
+              name="quiz_points"
+            />
           </Form.Group>
           <Form.Group inline>
-          <label>Difficulty</label>
-          <Form.Field control={Radio} label='Beginner' value='Beginner' checked={value === '1'} onChange={this.handleChange} name="difficulty"/>
-          <Form.Field control={Radio} label='Intermediate' value='Intermediate' checked={value === '2'} onChange={this.handleChange} name="difficulty"/>
-          <Form.Field control={Radio} label='Advanced' value='Advanced' checked={value === '3'} onChange={this.handleChange} name="difficulty"/>
-        </Form.Group>
-          <Form.TextArea label='Description' placeholder='Description on the quiz.' name="description"/>
+            <label>Difficulty</label>
+            <Form.Field
+              control={Radio}
+              label="Beginner"
+              value="Beginner"
+              checked={value === "Beginner"}
+              onChange={this.handleChange}
+              name="difficulty"
+            />
+            <Form.Field
+              control={Radio}
+              label="Intermediate"
+              value="Intermediate"
+              checked={value === "Intermediate"}
+              onChange={this.handleChange}
+              name="difficulty"
+            />
+            <Form.Field
+              control={Radio}
+              label="Advanced"
+              value="Advanced"
+              checked={value === "Advanced"}
+              onChange={this.handleChange}
+              name="difficulty"
+            />
+          </Form.Group>
+          <Form.TextArea
+            label="Description"
+            placeholder="Description on the quiz."
+            name="description"
+          />
           <Form.Button>Submit</Form.Button>
         </Form>
       </Container>
-    )
+    );
   }
 }
 
