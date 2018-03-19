@@ -29,11 +29,26 @@ class QuizNew extends Component {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     // debugger
+    let difficulty;
+    switch(formData.get("difficulty")) {
+      case "1":
+        difficulty = "Beginner";
+        break;
+      case "2":
+        difficulty = "Intermediate";
+        break;
+      case "3":
+        difficulty = "Advance";
+        break;
+      default:
+        difficulty = "Beginner";
+    }
+
     Quiz.create({
       quiz: {
         name: formData.get("name"),
         description: formData.get("description"),
-        difficulty: formData.get("difficulty"),
+        difficulty: difficulty,
         quiz_points: formData.get("quiz_points"),
       }
     }).then(data => {

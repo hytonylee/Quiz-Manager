@@ -309,8 +309,8 @@ class QuizIndex extends Component {
 
                   <Card.Content extra>
                     <div>
-                      <Button id={quiz_taken.id} basic fluid color="green">
-                        Continue!
+                      <Button onClick={this.deleteQuiz  } id={quiz_taken.id} basic fluid color="red">
+                        Remove
                       </Button>
                     </div>
                   </Card.Content>

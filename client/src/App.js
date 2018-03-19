@@ -121,7 +121,7 @@ class App extends React.Component {
             <AuthRoute
               isAuthenticated={this.isSignedIn()}
               exact
-              path="/quizzes/:quizId/take_quiz/:quizTakenId"
+              path="/quizzes/:quizId/questions"
               component={QuizShow}
             />
             <AuthRoute
