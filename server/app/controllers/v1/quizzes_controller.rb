@@ -24,6 +24,7 @@ class V1::QuizzesController < ApplicationController
 
   def destroy
     @quiz.destroy
+    render json: Quiz.order(:id)
   end
 
   private
@@ -38,7 +39,7 @@ class V1::QuizzesController < ApplicationController
 
   def authorize_user!
     unless can?(:manage, :all)
-      # flash[:alert] = 'Access Denied!'
+      #
       render(
         json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
       )

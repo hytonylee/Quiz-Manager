@@ -58,7 +58,8 @@ class App extends React.Component {
       <Router>
         <div>
 
-          <NavBarUser user={this.state.user} />
+          <NavBarUser user={this.state.user} onSignOut={this.signOut} />
+
           <Switch>
             <Route exact path="/" component={Homepage} />
 
@@ -66,6 +67,15 @@ class App extends React.Component {
               exact
               path="/sign_up"
               render={props => <SignUpPage {...props} onSignUp={this.signIn} />}
+            />
+
+            
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              user={this.state.user}
+              exact
+              path="/quizzes"
+              component={QuizIndex}
             />
 
           <Route
@@ -80,12 +90,7 @@ class App extends React.Component {
             path="/quizzes/:quizId/question/:questionId"
             component={QuestionShow}
           />
-          <AuthRoute
-            isAuthenticated={this.isSignedIn()}
-            exact
-            path="/quizzes"
-            component={QuizIndex}
-          />
+          
            <AuthRoute
             isAuthenticated={this.isSignedIn()}
             exact

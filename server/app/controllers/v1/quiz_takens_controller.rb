@@ -1,7 +1,7 @@
 class V1::QuizTakensController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :find_quiz_taken, only: [:update]
-  before_action :authorize_user!
+  # before_action :authorize_user!
 
   def create
     qt = QuizTaken.new(user_id: params[:user_id], quiz_id: params[:quiz_id])

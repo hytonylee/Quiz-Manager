@@ -1,7 +1,7 @@
 class V1::UsersController < ApplicationController
 
   before_action :authenticate_user!, except: [:create, :reset_password]
-  before_action :authorize_user!, except: [:create, :reset_password]
+  # before_action :authorize_user!, only: [:index]
 
   def index
     render json: User.order(total_score: :desc)
@@ -72,8 +72,10 @@ class V1::UsersController < ApplicationController
   end
 
   def authorize_user!
-    unless can?(:manage, :all)
-      flash[:alert] = 'Access Denied!'
+
+    unless can?(:crud, @question)
+
+
       render(
         json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
       )

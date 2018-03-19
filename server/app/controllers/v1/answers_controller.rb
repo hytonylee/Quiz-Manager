@@ -30,7 +30,7 @@ class V1::AnswersController < ApplicationController
 
   def authorize_user!
     unless can?(:manage, :all)
-      flash[:alert] = 'Access Denied!'
+      
       render(
         json: { errors: [{type: "Unauthorized"}] }, status: :unauthorized
       )

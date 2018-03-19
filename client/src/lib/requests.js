@@ -23,6 +23,15 @@ const Quiz = {
     }).then(res => res.json());
   },
   //----------------------------------------------
+  delete(id) {
+    return fetch(`${BASE_URL}/quizzes/${id}`, {
+      headers: {
+        Authorization: getJWT()
+      },
+      method: "DELETE"
+    }).then(res => res.json());
+  },
+  //----------------------------------------------
   create(params) {
     return fetch(`${BASE_URL}/quizzes`, {
       headers: {
@@ -136,6 +145,14 @@ const User = {
   }
 };
 
-const QuizTaken = {};
+const QuizTaken = {
+  all(userId) {
+    return fetch(`${BASE_URL}/users/${userId}/quiz_takens`, {
+      headers: {
+        Authorization: getJWT()
+      }
+    }).then(res => res.json());
+  }
+};
 
 export { Quiz, Question, Token, User, QuizTaken };
