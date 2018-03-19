@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Divider, Icon } from "semantic-ui-react";
+import { Container, Divider, Icon, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.css";
@@ -36,14 +36,16 @@ class Homepage extends Component {
       <main className="Homepage mt-5">
         <Container className="homepage-main-container">
           <Container textAlign="center" className="homepage-container mt-5">
-            <h1>Welcome to CodeCore Drills</h1>
+            <Header style={{ fontSize: "65px" }}>
+              Welcome to Quirky Quizzes
+            </Header>
           </Container>
           <Container textAlign="center" className="homepage-container mt-3">
-            <Icon name="setting" size="huge" color="red" className="m-5" />
-            <Icon name="checkmark" size="huge" color="red" className="m-5" />
+            <Icon name="setting" size="massive" color="red" className="m-5" />
+            <Icon name="checkmark" size="massive" color="red" className="m-5" />
             <Icon
               name="location arrow"
-              size="huge"
+              size="massive"
               color="red"
               className="m-5"
             />

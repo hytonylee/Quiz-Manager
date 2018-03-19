@@ -43,13 +43,12 @@ class SignInPage extends Component {
 
     return (
       <main className="SignInPage" style={{ margin: "0 1rem" }}>
-
         <Container textAlign="center" className="homepage-container mt-3">
-          <Icon name="setting" size="huge" color="red" className="m-5" />
-          <Icon name="checkmark" size="huge" color="red" className="m-5" />
+          <Icon name="setting" size="massive" color="red" className="m-5" />
+          <Icon name="checkmark" size="massive" color="red" className="m-5" />
           <Icon
             name="location arrow"
-            size="huge"
+            size="massive"
             color="red"
             className="m-5"
           />

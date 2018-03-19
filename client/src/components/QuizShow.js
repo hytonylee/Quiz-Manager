@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Question, Quiz } from "../lib/requests";
 import QuestionForm from "./QuestionForm";
-import { Card, Button, Container, Divider } from "semantic-ui-react";
+import { Card, Button, Container, Divider, Segment } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 class QuizShow extends Component {
@@ -72,7 +72,7 @@ class QuizShow extends Component {
 
     const { quiz } = this.state;
 
-    const {quizId} = this.state
+    const { quizId } = this.state;
     return (
       <main className="QuizShow" style={{ margin: "0 1rem" }}>
         <Container>
@@ -82,36 +82,34 @@ class QuizShow extends Component {
           <br />
           <strong>Quiz Total Points: {quiz.quiz_points}</strong>
           <br />
-          <Button>
+          <Button basic>
             <Link to={`/quizzes/${this.state.quizId}`}>Edit Quiz</Link>
           </Button>
           <Divider />
 
-          <ul className="quiz-list">
+          <Segment.Group className="quiz-list">
             {this.state.questions.map(question => {
               return (
-                <li key={question.id}>
+                <Segment key={question.id}>
                   <p>{question.body}</p>
-                  <button
+                  <Button
+                    size="tiny"
                     data-question-id={question.id}
                     onClick={this.deleteQuestion}
                   >
                     Delete
-                  </button>
-
-                </li>
+                  </Button>
+                </Segment>
               );
             })}
-          </ul>
+          </Segment.Group>
 
           <Divider />
           <QuestionForm quizId={this.state.quizId} />
         </Container>
       </main>
-
     );
   }
 }
 
 export default QuizShow;
-
