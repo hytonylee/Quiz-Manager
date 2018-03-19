@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../lib/requests";
-import { Container, Table } from "reactstrap";
+import { ListGroup, ListGroupItem, Container, Row, Col } from "reactstrap";
 
 class AdminDashboard extends React.Component {
   constructor(props) {
@@ -23,38 +23,34 @@ class AdminDashboard extends React.Component {
   }
 
   render() {
-    const { users} = this.state;
-
+    const { users } = this.state;
     return (
       <Container>
+        <Row>
+          <Col xs="10">
+            <ListGroup>
               <p></p>
               <h1>Admin Dashboard</h1>
-              <Table bordered responsive size="sm">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Total Score</th>
-                    <th>Badges</th>
-                  </tr>
-                </thead>
-              </Table>
-              {
-                users.map(
-                  user => (
-                    <Table bordered striped size="sm">
-                      <tbody>
-                        <tr>
-                          <td>{user.first_name} {user.last_name}</td>
-                          <td>{user.email}</td>
-                          <td>{user.total_score}</td>
-                          <td>{user.number_of_badges}</td>
-                        </tr>
-                      </tbody>
-                    </Table>
-                  )
-                )
-              }
+              <ListGroupItem className="userSummary header">
+                <div className="firstName">First Name</div>
+                <div className="lastName">Last Name</div>
+                <div className="totalScore">Points</div>
+                <div className="numberOfBadges">Total Badges</div>
+                <div className="email">Email</div>
+              </ListGroupItem>
+              {users.map(user => (
+                <ListGroupItem className="userSummary" key={user.id}>
+                  <div className="firstName">{user.first_name}</div>
+                  <div className="lastName">{user.last_name}</div>
+                  <div className="totalScore">{user.total_score}</div>
+                  <div className="numberOfBadges">{user.number_of_badges}</div>
+                  <div className="email">{user.email}</div>
+                </ListGroupItem>
+              ))}
+
+            </ListGroup>
+          </Col>
+        </Row>
       </Container>
     );
   }

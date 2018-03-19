@@ -112,7 +112,7 @@ class App extends React.Component {
           <AuthRoute
             isAuthenticated={this.isSignedIn()}
             exact
-            path="/admin"
+            path="/dashboard"
             component={AdminDashboard}
           />
           {/* <AuthRoute
