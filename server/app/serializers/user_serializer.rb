@@ -9,8 +9,8 @@ class UserSerializer < ActiveModel::Serializer
 
     belongs_to :quiz
     class QuizSerializer < ActiveModel::Serializer
-     attributes :id, :name, :description, :difficulty, :quiz_points
-     end
+      attributes :id, :name, :description, :difficulty, :quiz_points
+    end
   end
 
 end

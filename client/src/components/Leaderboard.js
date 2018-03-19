@@ -7,6 +7,7 @@ class Leaderboard extends React.Component {
     super(props);
     this.state = {
       users: [],
+      user: this.props.user,
       loading: true
     };
   }
@@ -18,12 +19,15 @@ class Leaderboard extends React.Component {
         loading: false
       });
     });
-    console.log(this.state.users);
+    // User.one(user.id).then(user => {
+    //   this.setState({
+    //     user: user
+    //   });
+    // });
   }
 
   render() {
-    const { users, loading } = this.state;
-    console.log(users);
+    const { users, user, loading } = this.state;
     return (
       <Container>
         <Row>
@@ -31,9 +35,18 @@ class Leaderboard extends React.Component {
             <ListGroup>
               <h1>Leaderboard</h1>
 
+              <ListGroupItem className="userSummary header">
+                <div className="firstName">First Name</div>
+                <div className="lastName">Last Name</div>
+                <div className="totalScore">Points</div>
+                <div className="numberOfBadges">Total Badges</div>
+              </ListGroupItem>
               {users.map(user => (
-                <ListGroupItem key={user.id}>
-                  {user.first_name} {user.last_name}
+                <ListGroupItem className="userSummary" key={user.id}>
+                  <div className="firstName">{user.first_name}</div>
+                  <div className="lastName">{user.last_name}</div>
+                  <div className="totalScore">{user.total_score}</div>
+                  <div className="numberOfBadges">{user.number_of_badges}</div>
                 </ListGroupItem>
               ))}
 
@@ -41,7 +54,9 @@ class Leaderboard extends React.Component {
           </Col>
           <Col xs="4">
             <div className="profile-box">
-              <h1>Profile Name</h1>
+              <h1>Profile</h1>
+              <p><strong>Name:</strong> {user.first_name} {user.last_name}</p>
+              <p><strong>Accumulated Points :</strong> {user.total_score}</p>
               <p>500 Points</p>
               <p>5 Badgets</p>
             </div>

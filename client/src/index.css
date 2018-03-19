@@ -42,3 +42,16 @@ nav {
   border-width: 1px;
   padding: 10px;
 }
+
+li.userSummary {
+  display: flex;
+  flex-direction: row;
+}
+
+li.userSummary.header {
+  font-weight: bold;
+}
+
+li.userSummary > div {
+  width: 25%;
+}

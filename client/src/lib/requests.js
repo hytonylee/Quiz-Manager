@@ -63,8 +63,8 @@ const Question = {
     }).then(res => res.json());
   },
   //----------------------------------------------
-  create(params) {
-    return fetch(`${BASE_URL}/questions`, {
+  create(params, quiz_id) {
+    return fetch(`${BASE_URL}/quizzes/${quiz_id}/questions`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: getJWT()
@@ -100,7 +100,6 @@ const Token = {
 
 const User = {
   create(params) {
-    console.log(params);
     return fetch(`${BASE_URL}/users`, {
       headers: {
         "Content-Type": "application/json"

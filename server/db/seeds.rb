@@ -56,6 +56,9 @@ end
     email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
     password: PASSWORD
   )
+  u.total_score = rand(1000...20000)
+  u.number_of_badges = rand(0...8)
+  u.save
   10.times.each do
     quiz = Quiz.all.sample
     qt = QuizTaken.create(

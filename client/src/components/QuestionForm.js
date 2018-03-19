@@ -25,17 +25,19 @@ class QuestionForm extends React.Component {
 
     const questionBody = document.querySelector(".questionBody textarea").value
     let answerBodies = []
-    document.querySelectorAll(".answerBody textarea").forEach( ab => answerBodies.push(ab.value))
+    document.querySelectorAll(".answerBody textarea").forEach( answerBody => answerBodies.push(answerBody.value))
 
     const outputObj = {
-      'body': "qb",
+      'body': questionBody,
       'answers_attributes': { }
     }
 
     for (let i = 0; i < answerBodies.length; i += 1) {
-      outputObj.answers_attribute[`${i}`] = answerBodies[i]
+      outputObj.answers_attributes[`${i}`] = { 'body': answerBodies[i] }
     }
-    Question.create(outputObj)
+    
+    let user_id = this.props.match.params.quiz_id
+    Question.create(outputObj, quiz_id)
 
   }
   render() {
