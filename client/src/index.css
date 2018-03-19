@@ -66,5 +66,10 @@ li.userSummary.header {
 
 li.userSummary > div {
   width: 25%;
+}
 
+li.questionList {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
 }

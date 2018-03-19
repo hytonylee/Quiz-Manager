@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Quiz, QuizTaken } from "../lib/requests";
+import { Quiz, QuizTaken, User } from "../lib/requests";
 import { Link } from "react-router-dom";
 import { Card, Button, Container } from "semantic-ui-react";
 
@@ -10,20 +10,28 @@ class QuizIndex extends Component {
 
     this.state = {
       quizzes: [],
-      quizTakens: []
+      my_quizTakens: [],
+      viewType: "all"
     };
     this.deleteQuiz = this.deleteQuiz.bind(this);
     this.addQuiz = this.addQuiz.bind(this);
+    this.filterQuizzes = this.filterQuizzes.bind(this);
+    this.allQuizzes = this.allQuizzes.bind(this);
+    this.newQuizTaken = this.newQuizTaken.bind(this);
+
   }
 
   componentDidMount() {
     Quiz.all().then(quizzes => {
       this.setState({
         quizzes: quizzes
-        // ,
-        // loading: false
-      });
+      })
     });
+    // QuizTaken.all().then(quizTakens => {
+    //   this.setState({
+    //     quizTakens: quizTakens
+    //   })
+    // });
   }
 
   addQuiz(addQuiz) {
@@ -33,16 +41,40 @@ class QuizIndex extends Component {
   findQuiz(id) {}
 
   allQuizzes() {
-    Quiz.all.then(quizzes => {
+    Quiz.all().then(quizzes => {
+      quizzes.forEach
       this.setState({
-        quizzes: quizzes
+        quizzes: quizzes,
+        viewType: "all"
       });
     });
   }
 
-  filterQuizzes(event) {
-    QuizTaken.all(39).then(quizzes => {
-      console.log(quizzes);
+  newQuizTaken(event) {
+    const quizId = event.currentTarget.id
+    const userId = this.props.user.id
+    const outputObj = {
+      "user_id": userId,
+      "quiz_id": quizId
+    }
+
+    QuizTaken.create(outputObj).then(qt => {
+      this.props.history.push(`/quizzes/${qt.quiz_id}/take_quiz/${qt.id}`)
+    })
+
+  }
+  //
+  // showQuizTaken(event) {
+  //   QuizTaken.one(outputObj).then(qt => console.log(qt))
+  //
+  // }
+
+  filterQuizzes() {
+    User.one(this.props.user.id).then(user => {
+      this.setState({
+        my_quizTakens: user.quiz_takens,
+        viewType: "filtered"
+      });
     });
   }
 
@@ -53,7 +85,7 @@ class QuizIndex extends Component {
   }
 
   render() {
-    const { quizzes } = this.state;
+    const { quizzes, viewType, my_quizTakens } = this.state;
     const { user } = this.props;
 
     if (user.is_admin) {
@@ -136,7 +168,7 @@ class QuizIndex extends Component {
         </Container>
 
       );
-    } else {
+    } else if (viewType === "all") {
       return (
         <Container>
           <div
@@ -194,25 +226,91 @@ class QuizIndex extends Component {
                   <Card.Content header={quiz.name} />
                   <Card.Content description={quiz.description} />
                   <Card.Content extra style={{ textAlign: "center" }}>
-                    <strong>
+                    {/* <strong>
                       Taken: {3} times | Score {34}%
-                    </strong>
+                    </strong> */}
                   </Card.Content>
 
                   <Card.Content extra>
                     <div className="ui two buttons">
-                      <Button id={quiz.id} basic color="green">
-                        Start
-                      </Button>
-                      <Button id={quiz.id} basic color="red">
-                        Remove
+                      <Button onClick={this.newQuizTaken} id={quiz.id} basic color="green">
+                        Start!
                       </Button>
                     </div>
                   </Card.Content>
+                </Card>
+              ))}
+            </div>
+          </main>
+        </Container>
+      );
+    } else {
+      return (
+        <Container>
+          <div
+            className="ui two buttons"
+            style={{
+              marginTop: "75px",
+              marginLeft: "25px",
+              borderRadius: "0px",
+              display: "flex",
+              alignItems: "center"
+            }}
+          >
+            <Button
+              style={{ maxWidth: "150px", margin: "2px" }}
+              onClick={this.filterQuizzes}
+            >
+              My Quizzes
+            </Button>
+            <Button.Or />
+            <Button
+              style={{ maxWidth: "150px", margin: "2px" }}
+              onClick={this.allQuizzes}
+            >
+              All Quizzes
+            </Button>
+          </div>
+          <main
+            className="QuizIndex"
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              flexDirection: "row",
+              justifyContent: "center"
+            }}
+          >
+            <div
+              style={{
+                width: "1100px",
+                borderRadius: "10px",
+                border: "1px solid grey",
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "center"
+              }}
+            >
+              {my_quizTakens.map(quiz_taken => (
+                <Card
+                  key={quiz_taken.id}
+                  style={{
+                    minWidth: "240px",
+                    margin: "10px"
+                  }}
+                >
+                  <Card.Content header={quiz_taken.quiz.name} />
+                  <Card.Content description={quiz_taken.quiz.description} />
+                  <Card.Content extra style={{ textAlign: "center" }}>
+                    <strong>
+                       Score: {quiz_taken.score ? `${quiz_taken.score / quiz_taken.quiz.quiz_points * 100}%` : "Incompleted"}
+                    </strong>
+                  </Card.Content>
+
                   <Card.Content extra>
                     <div>
-                      <Button id={quiz.id} basic fluid color="green">
-                        Add to My Quizzes
+                      <Button id={quiz_taken.id} basic fluid color="green">
+                        Continue!
                       </Button>
                     </div>
                   </Card.Content>

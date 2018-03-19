@@ -146,11 +146,30 @@ const User = {
 };
 
 const QuizTaken = {
-  all(userId) {
-    return fetch(`${BASE_URL}/users/${userId}/quiz_takens`, {
+  all() {
+    return fetch(`${BASE_URL}/quiz_takens`, {
       headers: {
         Authorization: getJWT()
       }
+    }).then(res => res.json());
+  },
+  //----------------------------------------------
+  one(id) {
+    return fetch(`${BASE_URL}/quiz_takens/${id}`, {
+      headers: {
+        Authorization: getJWT()
+      }
+    }).then(res => res.json());
+  },
+  //----------------------------------------------
+  create(params) {
+    return fetch(`${BASE_URL}/quiz_takens`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getJWT()
+      },
+      method: "POST",
+      body: JSON.stringify(params)
     }).then(res => res.json());
   }
 };

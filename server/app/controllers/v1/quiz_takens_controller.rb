@@ -1,17 +1,19 @@
 class V1::QuizTakensController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :find_quiz_taken, only: [:update]
-  # before_action :authorize_user!
+
 
   def create
     qt = QuizTaken.new(user_id: params[:user_id], quiz_id: params[:quiz_id])
     qt.question = qt.quiz.questions.order(:id).first
     qt.correct_answers = 0
     qt.save!
+
+    render json: qt
   end
 
   def index
-    render json: QuizTaken.where(user_id: params[:user_id]).order(:id)
+    render json: QuizTaken.all
   end
 
   def update

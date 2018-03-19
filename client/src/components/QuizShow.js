@@ -14,6 +14,8 @@ class QuizShow extends Component {
       loading: true
     };
     this.deleteQuestion = this.deleteQuestion.bind(this);
+    this.quizConfirmed = this.quizConfirmed.bind(this);
+
   }
 
   deleteQuestion(event) {
@@ -26,6 +28,10 @@ class QuizShow extends Component {
       questions: newQuestions
     });
     Question.destroy(questionId);
+  }
+
+  quizConfirmed() {
+    this.props.history.push("/quizzes/")
   }
 
   componentDidMount(){
@@ -66,18 +72,14 @@ class QuizShow extends Component {
         <ul className="quiz-list">
           {this.state.questions.map( question => {
             return (
-              <li key={question.id}>
+              <li className="questionList" key={question.id}>
                 <p>{question.body}</p>
                 <button
                   data-question-id={question.id}
                   onClick={this.deleteQuestion}>
                   Delete
                 </button>
-                <button
-                  data-question-id={question.id}
-                  onClick={this.editQuestion}>
-                  Edit
-                </button>
+
               </li>
             )
           })}
@@ -85,6 +87,10 @@ class QuizShow extends Component {
       <QuestionForm
         quizId={this.state.quizId}
       />
+      <button
+        onClick={this.quizConfirmed}>
+        Confirm Quiz
+      </button>
     </main>
     );
   }
