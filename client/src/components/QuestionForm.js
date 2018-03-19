@@ -6,11 +6,14 @@ import AnswerShow from './AnswerShow'
 class QuestionForm extends React.Component {
   constructor(props){
     super(props)
+
+    this.state = {
+      numOfAnswers: 1,
+      quizId: props.quizId
+    }
+
     this.addAnswer = this.addAnswer.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.state = {
-      numOfAnswers: 1
-    }
   }
 
   addAnswer(){
@@ -35,9 +38,8 @@ class QuestionForm extends React.Component {
     for (let i = 0; i < answerBodies.length; i += 1) {
       outputObj.answers_attributes[`${i}`] = { 'body': answerBodies[i] }
     }
-    
-    let user_id = this.props.match.params.quiz_id
-    Question.create(outputObj, quiz_id)
+
+    Question.create(outputObj, this.state.quizId).then(window.location.reload())
 
   }
   render() {

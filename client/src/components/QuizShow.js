@@ -5,12 +5,16 @@ import QuestionForm from "./QuestionForm";
 class QuizShow extends Component {
   constructor(props){
     super(props);
+    const quizId = this.props.match.params.quizId
+
     this.state = {
       quiz: {},
       questions: {},
+      quizId: quizId,
       loading: true
     };
     this.deleteQuestion = this.deleteQuestion.bind(this);
+    this.questionsRefresh = this.questionsRefresh.bind(this);
   }
 
   deleteQuestion(event) {
@@ -24,13 +28,13 @@ class QuizShow extends Component {
     });
   }
 
+  questionsRefresh() {
+
+  }
+
   componentDidMount(){
-    const thisID = this.props.match.params.quizId
-    console.log('id:',thisID);
-    console.log('match:',this.props.match);
-    Quiz.one(thisID)
+    Quiz.one(this.state.quizId)
       .then( quiz => {
-        console.log("quiz: ", quiz);
         this.setState({
           quiz,
           questions: quiz.questions,
@@ -72,7 +76,9 @@ class QuizShow extends Component {
             )
           })}
         </ul>
-      <QuestionForm />
+      <QuestionForm
+        quizId={this.state.quizId}
+      />
     </main>
     );
   }
