@@ -29,6 +29,7 @@ class QuestionShow extends Component {
     // const questionId = this.props.match.params.questionId;
     const quizId = this.props.match.params.quizId;
     const quizTakenId = this.props.match.params.quizTakenId;
+    console.log(quizTakenId);
     // Question.one(questionId).then(question => {
     //   this.setState({ question: question, answers: question.answers });
     // });
@@ -85,7 +86,16 @@ class QuestionShow extends Component {
     });
   }
 
-  completeQuiz() {}
+  completeQuiz() {
+    console.log(this.props.match.params.quizTakenId);
+    QuizTaken.edit(
+      {
+        id: this.props.match.params.quizTakenId,
+        correct_answers: this.state.correctAnswers
+      },
+      this.props.match.params.quizTakenId
+    ).then(this.props.history.push("/quizzes"));
+  }
 
   showResults() {
     this.setState({
@@ -154,8 +164,9 @@ class QuestionShow extends Component {
             <br />
             <h2>
               You Scored: {this.state.correctAnswers}/{this.state.quizLength}
-              <Button onClick={this.completeQuiz}>Next Question</Button>
             </h2>
+            <br />
+            <Button onClick={this.completeQuiz}>Back to Quizzes</Button>
           </div>
         </div>
       </div>

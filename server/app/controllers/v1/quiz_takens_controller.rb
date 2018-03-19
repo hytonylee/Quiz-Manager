@@ -26,6 +26,7 @@ class V1::QuizTakensController < ApplicationController
     # one. Increase the user's total score by the difference.
     previous_array = QuizTaken.where(user_id: @qt.user_id, quiz_id: @qt.quiz_id).map { |qt| qt.score }
     previous_max = previous_array.max
+    @qt.correct_answers = params[:correct_answers]
 
     correct_answers = @qt.correct_answers
     total_questions = @qt.quiz.questions.count

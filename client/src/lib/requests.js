@@ -154,6 +154,17 @@ const QuizTaken = {
     }).then(res => res.json());
   },
   //----------------------------------------------
+  edit(params, id) {
+    return fetch(`${BASE_URL}/quiz_takens/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getJWT()
+      },
+      method: "PATCH",
+      body: JSON.stringify(params)
+    }).then(res => res.json());
+  },
+  //----------------------------------------------
   one(id) {
     return fetch(`${BASE_URL}/quiz_takens/${id}`, {
       headers: {
@@ -180,7 +191,7 @@ const QuizTaken = {
       },
       method: "DELETE"
     }).then(res => res.json());
-  },
+  }
 };
 
 export { Quiz, Question, Token, User, QuizTaken };
