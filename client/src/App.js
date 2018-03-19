@@ -11,6 +11,7 @@ import QuizIndex from "./components/QuizIndex";
 import QuizShow from "./components/QuizShow";
 import Leaderboard from "./components/Leaderboard";
 import AuthRoute from "./components/AuthRoute";
+import AdminDashboard from './components/AdminDashboard';
 
 class App extends React.Component {
   constructor(props) {
@@ -92,6 +93,12 @@ class App extends React.Component {
             exact
             path="/quizzes/:quizId"
             component={QuizShow}
+         />
+          <AuthRoute
+            isAuthenticated={this.isSignedIn()}
+            exact
+            path="/admin"
+            component={AdminDashboard}
           />
         </Switch>
         </div>

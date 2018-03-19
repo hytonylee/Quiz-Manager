@@ -14,6 +14,18 @@ super_user = User.create(
   is_admin: true
 )
 
+  User.create(
+    first_name: first_name,
+    last_name: last_name,
+    email: "#{first_name.downcase}.#{last_name.downcase}@example.com",
+    password_digest: "testing",
+    is_admin: false,
+    total_score: 100,
+    number_of_badges: 60,
+    created_at: "2018/12/08",
+    updated_at: "2018/12/08",
+    password: PASSWORD
+  )
 
 
 10.times.each do
@@ -131,3 +143,4 @@ puts "Seeded #{QuizTaken.all.count} quizzes that are taken"
 #     @qt.save
 #   end
 # end
+
