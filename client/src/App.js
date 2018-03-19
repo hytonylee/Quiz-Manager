@@ -12,8 +12,7 @@ import QuizShow from "./components/QuizShow";
 import Leaderboard from "./components/Leaderboard";
 import AuthRoute from "./components/AuthRoute";
 import QuizCreate from "./components/QuizCreate";
-import AdminDashboard from './components/AdminDashboard';
-
+import AdminDashboard from "./components/AdminDashboard";
 
 class App extends React.Component {
   constructor(props) {
@@ -57,7 +56,6 @@ class App extends React.Component {
     return (
       <Router>
         <div>
-
           <NavBarUser user={this.state.user} onSignOut={this.signOut} />
 
           <Switch>
@@ -78,50 +76,54 @@ class App extends React.Component {
               component={QuizIndex}
             />
 
-          <Route
-            exact
-            path="/sign_in"
-            render={props => <SignInPage {...props} onSignIn={this.signIn} />}
-          />
-          <AuthRoute
-            isAuthenticated={this.isSignedIn()}
-            onSignIn={this.signIn}
-            exact
-            path="/quizzes/:quizId/question/:questionId"
-            component={QuestionShow}
-          />
 
-           <AuthRoute
-            isAuthenticated={this.isSignedIn()}
-            exact
-            path="/quizcreate"
-            component={QuizCreate}
-          />
-          <AuthRoute
-            isAuthenticated={this.isSignedIn()}
-            user={this.state.user}
-            exact path="/leaderboard"
-            component={Leaderboard}
-          />
-          <AuthRoute
-            isAuthenticated={this.isSignedIn()}
-            exact
-            path="/quizzes/:quizId/questions"
-            component={QuizShow}
-         />
-          <AuthRoute
-            isAuthenticated={this.isSignedIn()}
-            exact
-            path="/dashboard"
-            component={AdminDashboard}
-          />
-          {/* <AuthRoute
+            <Route
+              exact
+              path="/sign_in"
+              render={props => <SignInPage {...props} onSignIn={this.signIn} />}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              onSignIn={this.signIn}
+              user={this.state.user}
+              exact
+              path="/quizzes/:quizId/take_quiz/:quizTakenId"
+              component={QuestionShow}
+            />
+
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              exact
+              path="/quizcreate"
+              component={QuizCreate}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              user={this.state.user}
+              exact
+              path="/leaderboard"
+              component={Leaderboard}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              exact
+              path="/quizzes/:quizId/take_quiz/:quizTakenId"
+              component={QuizShow}
+            />
+            <AuthRoute
+              isAuthenticated={this.isSignedIn()}
+              exact
+              path="/dashboard"
+              component={AdminDashboard}
+            />
+            {/* <AuthRoute
+
             isAuthenticated={this.isSignedIn()}
             exact
             path="/quizzes/:quizId/question/:questionId/edit"
             component={QuestionForm}
           /> */}
-        </Switch>
+          </Switch>
         </div>
       </Router>
     );

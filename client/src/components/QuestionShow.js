@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import NavBarUser from "./NavBarUser";
 import { Form, Button } from "semantic-ui-react";
 import { Question, Quiz, QuizTaken } from "../lib/requests";
 
@@ -9,86 +8,87 @@ class QuestionShow extends Component {
     this.state = {
       question: [],
       quiz: [],
-      quizzes: [],
+      questionIds: [], //array of questionIDs
+      quizLength: 0, //length of quiz
+      currentQuestionIndex: 0,
       answered: false,
+      correctAnswers: 0,
+      isCorrect: false,
       answers: [],
+      userAnswer: [],
       errors: []
     };
+    this.answerQuestion = this.answerQuestion.bind(this);
+    this.nextQuestion = this.nextQuestion.bind(this);
+    this.completeQuiz = this.completeQuiz.bind(this);
   }
 
   componentDidMount() {
-    console.log(this.props.match.params);
-    const questionId = this.props.match.params.questionId;
+    // const questionId = this.props.match.params.questionId;
     const quizId = this.props.match.params.quizId;
-    Question.one(questionId).then(question => {
-      this.setState({ question: question });
-    });
-    Quiz.all().then(quizzes => {
-      this.setState({ quizzes: quizzes });
-    });
+    const quizTakenId = this.props.match.params.quizTakenId;
+    // Question.one(questionId).then(question => {
+    //   this.setState({ question: question, answers: question.answers });
+    // });
+    // Quiz.all().then(quizzes => {
+    //   this.setState({
+    //     quizzes: quizzes,
+    //     quizLength: quizzes.length,
+    //     questionIds: quizzes.map(quiz => quiz.id)
+    //   });
+    // });
     Quiz.one(quizId).then(quiz => {
-      this.setState({ quiz: quiz });
+      this.setState({
+        question: quiz.questions[0],
+        answers: quiz.questions[0].answers,
+        quiz: quiz,
+        quizLength: quiz.questions.length,
+        questionIds: quiz.questions.map(question => question.id)
+      });
     });
     console.log(this.state);
   }
 
-  // createToken(event) {
-  //   const { onSignIn = () => {} } = this.props;
-  //   event.preventDefault();
-  //   const formData = new FormData(event.currentTarget);
-  //   Token.create({
-  //     email: formData.get("email"),
-  //     password: formData.get("password")
-  //   }).then(data => {
-  //     if (!data.errors) {
-  //       localStorage.setItem("jwt", data.jwt);
-  //       onSignIn();
-  //       this.props.history.push("/quizzes");
-  //     } else {
-  //       this.setState({
-  //         errors: [
-  //           {
-  //             message: "Invalid username or password"
-  //           }
-  //         ]
-  //       });
-  //     }
-  //   });
-  // }
-
   answerQuestion(event) {
-    const { tbdFunc = () => {} } = this.props;
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    QuizTaken.patch({
-      //add QuizTaken.patch to requests
-      correct: true,
-      questionIndex: 1
-    }).then(data => {
-      if (!data.errors) {
-        this.setState({
-          answers: [{ body: "one" }, { body: "two" }],
-          answered: true
-        });
-      } else {
-        this.setState({
-          errors: [
-            {
-              message: "Error Message"
-            }
-          ]
-        });
-      }
+    this.setState({
+      answered: true,
+      userAnswer: formData.get("Answer"),
+      currentQuestionIndex: this.state.currentQuestionIndex + 1,
+      isCorrect:
+        this.state.answers.filter(
+          answer => answer.body === this.state.userAnswer
+        ).length > 0
     });
   }
 
-  nextQuestion() {}
+  nextQuestion() {
+    this.setState({
+      question: this.state.quiz.questions[this.state.currentQuestionIndex],
+      // questionIds: [], //array of questionIDs
+      // quizLength: null, //length of quiz
+      // currentQuestionIndex: 0,
+      answered: false,
+      correctAnswers:
+        this.state.answers.filter(
+          answer => answer.body === this.state.userAnswer
+        ).length > 0
+          ? (this.state.correctAnswers += 1)
+          : this.state.correctAnswers,
+      answers: this.state.quiz.questions[this.state.currentQuestionIndex]
+        .answers,
+      userAnswer: [],
+      errors: []
+    });
+  }
+
+  completeQuiz() {}
 
   render() {
     return (
       <div>
-        <NavBarUser />
-        <h2>Quiz: #QUIZ NAME PLACEHOLDER#</h2>
+        <h2>Quiz: {this.state.quiz.name}</h2>
         <h3>Question: {this.state.question.body}</h3>
 
         <Form onSubmit={this.answerQuestion}>
@@ -102,20 +102,34 @@ class QuestionShow extends Component {
               name="Answer"
             />
           </Form.Field>
-          <Button type="submit">Sign In</Button>
+          <Button type="submit">Answer Question</Button>
         </Form>
         <div
           style={
             this.state.answered ? { display: "block" } : { display: "none" }
           }
         >
-          <h4>#YOUR ANSWER#</h4>
-          <h4>Answers:</h4>
-          <p>• Answer</p>
-          <p>• Answer</p>
-          <p>• Answer</p>
-          <p>• Answer</p>
-          <Button onClick={this.nextQuestion}>Next Question</Button>
+          <br />
+          <h3>
+            {this.state.answers.filter(
+              answer => answer.body === this.state.userAnswer
+            ).length > 0
+              ? "Correct!"
+              : "Incorrect"}
+          </h3>
+          <h4>
+            Your Answer: <strong>{this.state.userAnswer}</strong>
+          </h4>
+          <h4>Valid Answers:</h4>
+
+          <ul>{this.state.answers.map(answer => <li>{answer.body}</li>)}</ul>
+          {this.state.quizLength === this.state.currentQuestionIndex ? (
+            <Button color="red" onClick={this.completeQuiz}>
+              Complete Quiz
+            </Button>
+          ) : (
+            <Button onClick={this.nextQuestion}>Next Question</Button>
+          )}
         </div>
         {/* {this.state.question.answers.map(answer => (
           <div key={answer.id}>

@@ -7,11 +7,11 @@
   padding-right: 50px;
 }
 
-
-nav a, nav span, nav p {
+nav a,
+nav span,
+nav p {
   color: white;
   padding: 10px;
-
 }
 
 nav a:hover {
@@ -23,11 +23,11 @@ nav {
   background-color: #222529;
 }
 
-.Modal{
+.Modal {
   margin-top: 500px;
 }
 
-.profile-box{
+.profile-box {
   border-style: solid;
   border-width: 3px;
   padding: 10px;
@@ -43,8 +43,6 @@ nav {
   padding: 10px;
 }
 
-
-
 .NavBar {
   margin-bottom: 50px;
 }
@@ -53,7 +51,6 @@ nav {
   width: 100;
   margin-bottom: 2px
 }
-
 
 li.userSummary {
   display: flex;
