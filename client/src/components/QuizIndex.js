@@ -3,7 +3,6 @@ import { Quiz, QuizTaken, User } from "../lib/requests";
 import { Link } from "react-router-dom";
 import { Card, Button, Container } from "semantic-ui-react";
 
-
 class QuizIndex extends Component {
   constructor(props) {
     super(props);
@@ -19,14 +18,13 @@ class QuizIndex extends Component {
     this.allQuizzes = this.allQuizzes.bind(this);
     this.newQuizTaken = this.newQuizTaken.bind(this);
     this.deleteQuizTaken = this.deleteQuizTaken.bind(this);
-
   }
 
   componentDidMount() {
     Quiz.all().then(quizzes => {
       this.setState({
         quizzes: quizzes
-      })
+      });
     });
     // QuizTaken.all().then(quizTakens => {
     //   this.setState({
@@ -43,7 +41,7 @@ class QuizIndex extends Component {
 
   allQuizzes() {
     Quiz.all().then(quizzes => {
-      quizzes.forEach
+      quizzes.forEach;
       this.setState({
         quizzes: quizzes,
         viewType: "all"
@@ -52,29 +50,34 @@ class QuizIndex extends Component {
   }
 
   newQuizTaken(event) {
-    const quizId = event.currentTarget.id
-    const userId = this.props.user.id
+    const quizId = event.currentTarget.id;
+    const userId = this.props.user.id;
     const outputObj = {
-      "user_id": userId,
-      "quiz_id": quizId
-    }
+      user_id: userId,
+      quiz_id: quizId
+    };
 
     QuizTaken.create(outputObj).then(qt => {
-      this.props.history.push(`/quizzes/${qt.quiz_id}/take_quiz/${qt.id}`)
-    })
+      this.props.history.push(`/quizzes/${qt.quiz_id}/take_quiz/${qt.id}`);
+    });
+  }
+
+  restartQuiz(event) {
+    const quizTakenId = event.currentTarget.id;
+    const quizId = event.currentTarget.quizid;
+    this.props.history.push(`/quizzes/${quizId}/take_quiz/${quizTakenId}`);
   }
 
   deleteQuizTaken(event) {
-    const quizTakenId = event.currentTarget.id
-    QuizTaken.delete(quizTakenId).then( () => {
+    const quizTakenId = event.currentTarget.id;
+    QuizTaken.delete(quizTakenId).then(() => {
       User.one(this.props.user.id).then(user => {
         this.setState({
           my_quizTakens: user.quiz_takens,
           viewType: "filtered"
         });
       });
-    })
-
+    });
   }
 
   filterQuizzes() {
@@ -98,7 +101,6 @@ class QuizIndex extends Component {
 
     if (user.is_admin) {
       return (
-
         <Container>
           <Button
             basic
@@ -108,9 +110,8 @@ class QuizIndex extends Component {
               marginTop: "20px",
               marginBottom: "20px"
             }}
-          ><Link to="/quizcreate">
-            New Quiz
-            </Link>
+          >
+            <Link to="/quizcreate">New Quiz</Link>
           </Button>
           <div
             className="ui two buttons"
@@ -174,7 +175,6 @@ class QuizIndex extends Component {
             </div>
           </main>
         </Container>
-
       );
     } else if (viewType === "all") {
       return (
@@ -241,7 +241,12 @@ class QuizIndex extends Component {
 
                   <Card.Content extra>
                     <div className="ui two buttons">
-                      <Button onClick={this.newQuizTaken} id={quiz.id} basic color="green">
+                      <Button
+                        onClick={this.newQuizTaken}
+                        id={quiz.id}
+                        basic
+                        color="green"
+                      >
                         Start!
                       </Button>
                     </div>
@@ -302,6 +307,7 @@ class QuizIndex extends Component {
               {my_quizTakens.map(quiz_taken => (
                 <Card
                   key={quiz_taken.id}
+                  quiz={quiz_taken.quiz.id}
                   style={{
                     minWidth: "240px",
                     margin: "10px"
@@ -311,18 +317,65 @@ class QuizIndex extends Component {
                   <Card.Content description={quiz_taken.quiz.description} />
                   <Card.Content extra style={{ textAlign: "center" }}>
                     <strong>
-                       Score: {quiz_taken.score ? `${quiz_taken.score / quiz_taken.quiz.quiz_points * 100}%` : "Incompleted"}
+                      Score:{" "}
+                      {quiz_taken.score
+                        ? `${quiz_taken.score /
+                            quiz_taken.quiz.quiz_points *
+                            100}%`
+                        : "Incomplete"}
                     </strong>
                   </Card.Content>
 
                   <Card.Content extra>
                     <div>
-                      <Button onClick={this.deleteQuizTaken} id={quiz_taken.id} basic fluid color="red">
-                        Remove
+                      {quiz_taken.score ? (
+                        <Button
+                          onClick={this.deleteQuizTaken}
+                          id={quiz_taken.id}
+                          basic
+                          fluid
+                          color="red"
+                        >
+                          Remove
+                        </Button>
+                      ) : (
+                        <Link
+                          to={`/quizzes/${quiz_taken.quiz.id}/take_quiz/${
+                            quiz_taken.id
+                          }`}
+                        >
+                          <Button
+                            // onClick={this.restartQuiz}
+                            id={quiz_taken.id}
+                            quizId={quiz_taken.quiz_id}
+                            basic
+                            fluid
+                            color="green"
+                          >
+                            Start!
+                          </Button>
+                        </Link>
+                      )}
+                      {/* <Button
+                        onClick={this.newQuizTaken}
+                        id={quiz_taken.id}
+                        basic
+                        color="green"
+                      >
+                        Start!
                       </Button>
+
+                      <Button
+                        onClick={this.deleteQuizTaken}
+                        id={quiz_taken.id}
+                        basic
+                        fluid
+                        color="red"
+                      >
+                        Remove
+                      </Button> */}
                     </div>
                   </Card.Content>
-
                 </Card>
               ))}
             </div>
