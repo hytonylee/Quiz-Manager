@@ -16,11 +16,13 @@ class QuestionShow extends Component {
       isCorrect: false,
       answers: [],
       userAnswer: [],
-      errors: []
+      errors: [],
+      showResults: false
     };
     this.answerQuestion = this.answerQuestion.bind(this);
     this.nextQuestion = this.nextQuestion.bind(this);
     this.completeQuiz = this.completeQuiz.bind(this);
+    this.showResults = this.showResults.bind(this);
   }
 
   componentDidMount() {
@@ -85,6 +87,18 @@ class QuestionShow extends Component {
 
   completeQuiz() {}
 
+  showResults() {
+    this.setState({
+      correctAnswers:
+        this.state.answers.filter(
+          answer => answer.body === this.state.userAnswer
+        ).length > 0
+          ? (this.state.correctAnswers += 1)
+          : this.state.correctAnswers,
+      showResults: true
+    });
+  }
+
   render() {
     return (
       <div>
@@ -124,19 +138,26 @@ class QuestionShow extends Component {
 
           <ul>{this.state.answers.map(answer => <li>{answer.body}</li>)}</ul>
           {this.state.quizLength === this.state.currentQuestionIndex ? (
-            <Button color="red" onClick={this.completeQuiz}>
-              Complete Quiz
+            <Button color="red" onClick={this.showResults}>
+              See Results
             </Button>
           ) : (
             <Button onClick={this.nextQuestion}>Next Question</Button>
           )}
-        </div>
-        {/* {this.state.question.answers.map(answer => (
-          <div key={answer.id}>
-            <p>{answer.body}</p>
+          <div
+            style={
+              this.state.showResults
+                ? { display: "block" }
+                : { display: "none" }
+            }
+          >
             <br />
+            <h2>
+              You Scored: {this.state.correctAnswers}/{this.state.quizLength}
+              <Button onClick={this.completeQuiz}>Next Question</Button>
+            </h2>
           </div>
-        ))} */}
+        </div>
       </div>
     );
   }
