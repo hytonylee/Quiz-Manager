@@ -29,26 +29,12 @@ class QuizNew extends Component {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     // debugger
-    let difficulty;
-    switch(formData.get("difficulty")) {
-      case "1":
-        difficulty = "Beginner";
-        break;
-      case "2":
-        difficulty = "Intermediate";
-        break;
-      case "3":
-        difficulty = "Advance";
-        break;
-      default:
-        difficulty = "Beginner";
-    }
 
     Quiz.create({
       quiz: {
         name: formData.get("name"),
         description: formData.get("description"),
-        difficulty: difficulty,
+        difficulty: formData.get("difficulty"),
         quiz_points: formData.get("quiz_points"),
       }
     }).then(data => {
@@ -77,9 +63,9 @@ class QuizNew extends Component {
           </Form.Group>
           <Form.Group inline>
           <label>Difficulty</label>
-          <Form.Field control={Radio} label='Begginer' value='1' checked={value === '1'} onChange={this.handleChange} name="difficulty"/>
-          <Form.Field control={Radio} label='Intermediate' value='2' checked={value === '2'} onChange={this.handleChange} name="difficulty"/>
-          <Form.Field control={Radio} label='Advanced' value='3' checked={value === '3'} onChange={this.handleChange} name="difficulty"/>
+          <Form.Field control={Radio} label='Beginner' value='Beginner' checked={value === '1'} onChange={this.handleChange} name="difficulty"/>
+          <Form.Field control={Radio} label='Intermediate' value='Intermediate' checked={value === '2'} onChange={this.handleChange} name="difficulty"/>
+          <Form.Field control={Radio} label='Advanced' value='Advanced' checked={value === '3'} onChange={this.handleChange} name="difficulty"/>
         </Form.Group>
           <Form.TextArea label='Description' placeholder='Description on the quiz.' name="description"/>
           <Form.Button>Submit</Form.Button>

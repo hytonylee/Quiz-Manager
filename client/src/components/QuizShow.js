@@ -77,7 +77,6 @@ class QuizShow extends Component {
 
     const { quiz } = this.state;
     const {quizId} = this.state
-    console.log('quizxx:', quiz);
     return (
       <main className="QuizShow" style={{ margin: '0 1rem' }}>
 
@@ -102,11 +101,6 @@ class QuizShow extends Component {
                     onClick={this.deleteQuestion}>
                     Delete
                   </button>
-                  <button
-                    data-question-id={question.id}
-                    onClick={this.editQuestion}>
-                    Edit
-                  </button>
                 </li>
               )
             })}
@@ -116,42 +110,9 @@ class QuizShow extends Component {
           quizId={this.state.quizId}
         />
       </Container>
-//=======
-//         <h2>Quiz Name: {quiz.name}</h2>
-//         <p>Description for quiz: {quiz.description}</p>
-//         <strong>Quiz Difficulty: {quiz.difficulty}</strong><br />
-//         <strong>Quiz Total Points: {quiz.quit_points}</strong>
-//         <ul className="quiz-list">
-//           {this.state.questions.map( question => {
-//             return (
-//               <li className="questionList" key={question.id}>
-//                 <p>{question.body}</p>
-//                 <button
-//                   data-question-id={question.id}
-//                   onClick={this.deleteQuestion}>
-//                   Delete
-//                 </button>
-
-//               </li>
-//             )
-//           })}
-//         </ul>
-//       <QuestionForm
-//         quizId={this.state.quizId}
-//       />
-//       <button
-//         onClick={this.quizConfirmed}>
-//         Confirm Quiz
-//       </button>
-//>>>>>>> integration
     </main>
     );
   }
 }
 
 export default QuizShow;
-{/* <a
-  href={`quizzes/${quiz.id}/question/${question.id}/edit`}
-  onClick={() => { console.log(question.id) }}>
-  Edit
-</a> */}

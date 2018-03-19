@@ -171,7 +171,16 @@ const QuizTaken = {
       method: "POST",
       body: JSON.stringify(params)
     }).then(res => res.json());
-  }
+  },
+  //----------------------------------------------
+  delete(id) {
+    return fetch(`${BASE_URL}/quiz_takens/${id}`, {
+      headers: {
+        Authorization: getJWT()
+      },
+      method: "DELETE"
+    }).then(res => res.json());
+  },
 };
 
 export { Quiz, Question, Token, User, QuizTaken };

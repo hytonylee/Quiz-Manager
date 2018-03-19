@@ -18,6 +18,7 @@ class QuizIndex extends Component {
     this.filterQuizzes = this.filterQuizzes.bind(this);
     this.allQuizzes = this.allQuizzes.bind(this);
     this.newQuizTaken = this.newQuizTaken.bind(this);
+    this.deleteQuizTaken = this.deleteQuizTaken.bind(this);
 
   }
 
@@ -61,13 +62,20 @@ class QuizIndex extends Component {
     QuizTaken.create(outputObj).then(qt => {
       this.props.history.push(`/quizzes/${qt.quiz_id}/take_quiz/${qt.id}`)
     })
+  }
+
+  deleteQuizTaken(event) {
+    const quizTakenId = event.currentTarget.id
+    QuizTaken.delete(quizTakenId).then( () => {
+      User.one(this.props.user.id).then(user => {
+        this.setState({
+          my_quizTakens: user.quiz_takens,
+          viewType: "filtered"
+        });
+      });
+    })
 
   }
-  //
-  // showQuizTaken(event) {
-  //   QuizTaken.one(outputObj).then(qt => console.log(qt))
-  //
-  // }
 
   filterQuizzes() {
     User.one(this.props.user.id).then(user => {
@@ -309,7 +317,7 @@ class QuizIndex extends Component {
 
                   <Card.Content extra>
                     <div>
-                      <Button onClick={this.deleteQuiz  } id={quiz_taken.id} basic fluid color="red">
+                      <Button onClick={this.deleteQuizTaken} id={quiz_taken.id} basic fluid color="red">
                         Remove
                       </Button>
                     </div>

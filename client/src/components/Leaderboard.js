@@ -19,11 +19,12 @@ class Leaderboard extends React.Component {
         loading: false
       });
     });
-    // User.one(user.id).then(user => {
-    //   this.setState({
-    //     user: user
-    //   });
-    // });
+
+    User.one(this.state.user.id).then(user => {
+      this.setState({
+        user: user
+      });
+    });
   }
 
   render() {
@@ -55,10 +56,9 @@ class Leaderboard extends React.Component {
           <Col xs="4">
             <div className="profile-box">
               <h1>Profile</h1>
-              <p><strong>Name:</strong> {user.first_name} {user.last_name}</p>
-              <p><strong>Accumulated Points :</strong> {user.total_score}</p>
-              <p>500 Points</p>
-              <p>5 Badgets</p>
+              <p><strong>Name: </strong> {user.first_name} {user.last_name}</p>
+              <p><strong>Accumulated Points: </strong> {user.total_score}</p>
+              <p><strong>Number of Badges: </strong> {user.number_of_badges}</p>
             </div>
           </Col>
         </Row>

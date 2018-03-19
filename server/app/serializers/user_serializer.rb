@@ -1,5 +1,4 @@
 class UserSerializer < ActiveModel::Serializer
-
   attributes :id, :first_name, :last_name, :email, :total_score, :number_of_badges
 
   has_many :quiz_takens
