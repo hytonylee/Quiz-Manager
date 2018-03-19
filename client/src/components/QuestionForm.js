@@ -6,7 +6,6 @@ import AnswerShow from './AnswerShow'
 class QuestionForm extends React.Component {
   constructor(props){
     super(props)
-
     this.state = {
       numOfAnswers: 1,
       quizId: props.quizId
@@ -38,10 +37,9 @@ class QuestionForm extends React.Component {
     for (let i = 0; i < answerBodies.length; i += 1) {
       outputObj.answers_attributes[`${i}`] = { 'body': answerBodies[i] }
     }
-
     Question.create(outputObj, this.state.quizId).then(window.location.reload())
-
   }
+  
   render() {
     return (
       <div className='QuestionForm'>

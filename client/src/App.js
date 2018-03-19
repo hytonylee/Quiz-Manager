@@ -100,6 +100,12 @@ class App extends React.Component {
             path="/admin"
             component={AdminDashboard}
           />
+          {/* <AuthRoute
+            isAuthenticated={this.isSignedIn()}
+            exact
+            path="/quizzes/:quizId/question/:questionId/edit"
+            component={QuestionForm}
+          /> */}
         </Switch>
         </div>
       </Router>

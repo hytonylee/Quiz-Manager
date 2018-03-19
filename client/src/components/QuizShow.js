@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Quiz } from "../lib/requests";
+import { Question, Quiz } from "../lib/requests";
 import QuestionForm from "./QuestionForm";
 
 class QuizShow extends Component {
@@ -26,10 +26,7 @@ class QuizShow extends Component {
     this.setState({
       questions: newQuestions
     });
-  }
-
-  questionsRefresh() {
-
+    Question.destroy(questionId);
   }
 
   componentDidMount(){
@@ -59,6 +56,8 @@ class QuizShow extends Component {
       )}
 
     const { quiz } = this.state;
+    const {quizID} = this.state
+    console.log('quizxx:', quiz);
     return (
       <main className="QuizShow" style={{ margin: '0 1rem' }}>
         <h2>Questions for quiz: {quiz.name}</h2>
@@ -71,6 +70,11 @@ class QuizShow extends Component {
                   data-question-id={question.id}
                   onClick={this.deleteQuestion}>
                   Delete
+                </button>
+                <button
+                  data-question-id={question.id}
+                  onClick={this.editQuestion}>
+                  Edit
                 </button>
               </li>
             )
@@ -85,3 +89,8 @@ class QuizShow extends Component {
 }
 
 export default QuizShow;
+{/* <a
+  href={`quizzes/${quiz.id}/question/${question.id}/edit`}
+  onClick={() => { console.log(question.id) }}>
+  Edit
+</a> */}

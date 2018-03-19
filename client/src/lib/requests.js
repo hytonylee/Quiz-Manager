@@ -83,6 +83,16 @@ const Question = {
       method: "PATCH",
       body: JSON.stringify(params)
     }).then(res => res.json());
+  },
+  //----------------------------------------------
+  destroy(id) {
+    return fetch(`${BASE_URL}/questions/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getJWT()
+      },
+      method: "DELETE"
+    });
   }
 };
 
