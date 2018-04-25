@@ -1,4 +1,4 @@
-This project was created as part of the CodeCore web development bootcamp (January 2018 Cohort). It was completed using a rails API, a react front end, and copius amounts of caffeine.
+This is a collaborative prototype app for managing quizzes for educational environment or trainning scenario, made with React frontend and Rails Api as backend.
 
 # Project Overview
 
