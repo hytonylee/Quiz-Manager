@@ -2,8 +2,7 @@ This is a collaborative prototype app for managing quizzes for educational envir
 
 # Project Overview
 
-This side is designed to act as a training ground for users to hone their coding development skills.
-
+This site is designed to act as a training ground for users to hone their coding development skills.
 Users can compete quizzes to earn points and badges to work their way up the leaderboard.
 
 # Setup
